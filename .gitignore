@@ -116,6 +116,7 @@ CLOUD_*.md
 MOTION_*.md
 *_README.md
 pose_deployment_README.md
+twist2_training_README*.md
 
 # Backup files
 *.bak

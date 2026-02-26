@@ -75,3 +75,35 @@ TWIST2-clean/
 unitree_sdk2/
 
 twist2_demonstration/
+
+*.STL
+
+set_proxy.sh
+
+# Temporary files and scripts
+*.tar.gz
+*.hdf5
+*_report.txt
+log.txt
+
+# Data directories
+data/
+
+assets/Tienkung/
+
+# Model checkpoints and temporary files (additional)
+*.tgz
+*.jupyterlab-workspace
+.idea/
+
+# Garbage files
+legged_gym/0,
+legged_gym/5.
+legged_gym/=
+legged_gym/self.*
+
+# Debug scripts
+debug_*.py
+test_*.py
+inspect_*.py
+verify_*.py

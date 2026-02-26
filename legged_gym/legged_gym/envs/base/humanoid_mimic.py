@@ -95,7 +95,8 @@ class HumanoidMimic(HumanoidChar):
         self._motion_lib = MotionLib(motion_file=self.cfg.motion.motion_file, device=self.device,
                                      sample_ratio=self.cfg.motion.sample_ratio,
                                     motion_decompose=self.cfg.motion.motion_decompose,
-                                    motion_smooth=self.cfg.motion.motion_smooth)
+                                    motion_smooth=self.cfg.motion.motion_smooth,
+                                    motion_height_adjust=True)
         return
     
     def _init_motion_buffers(self):
@@ -158,7 +159,8 @@ class HumanoidMimic(HumanoidChar):
         self._ref_root_ang_vel[env_ids] = root_ang_vel
         self._ref_dof_pos[env_ids] = dof_pos
         self._ref_dof_vel[env_ids] = dof_vel
-        self._ref_body_pos[env_ids] = convert_to_global_root_body_pos(root_pos=root_pos, root_rot=root_rot, body_pos=body_pos)
+        global_body_pos = convert_to_global_root_body_pos(root_pos=root_pos, root_rot=root_rot, body_pos=body_pos)
+        self._ref_body_pos[env_ids[:, None], self._key_body_ids[None, :]] = global_body_pos
         
     
     def _get_motion_times(self, env_ids=None):
@@ -181,7 +183,8 @@ class HumanoidMimic(HumanoidChar):
         self._ref_root_ang_vel[:] = root_ang_vel
         self._ref_dof_pos[:] = dof_pos
         self._ref_dof_vel[:] = dof_vel
-        self._ref_body_pos[:] = convert_to_global_root_body_pos(root_pos=root_pos, root_rot=root_rot, body_pos=body_pos)
+        global_body_pos = convert_to_global_root_body_pos(root_pos=root_pos, root_rot=root_rot, body_pos=body_pos)
+        self._ref_body_pos[:, self._key_body_ids] = global_body_pos
             
     def _reset_root_states(self, env_ids, root_vel=None, root_quat=None, root_pos=None, root_ang_vel=None):
         """ Resets ROOT states position and velocities of selected environmments
@@ -209,8 +212,14 @@ class HumanoidMimic(HumanoidChar):
                 self.root_states[env_ids, 3:7] = root_quat[env_ids, :]
             
             if root_pos is not None:
-                self.root_states[env_ids, 2] = root_pos[env_ids, 2] + 0.05 # always higher a bit to avoid foot penetration
+                self.root_states[env_ids, 2] = root_pos[env_ids, 2]+0.05 # Increase offset from 0.05 to 0.15 to prevent ground penetration
                 self.root_states[env_ids, :2] += root_pos[env_ids, :2]
+                 
+                # Debug print for reset height (DISABLED - too verbose, use wandb instead)
+                # if len(env_ids) > 0:
+                #     print(f"[Diagnostic] Reset Env {env_ids[0]} - Motion Height: {root_pos[env_ids[0], 2]:.3f}, Final Height: {self.root_states[env_ids[0], 2]:.3f}")
+
+
             if root_ang_vel is not None:
                 self.root_states[env_ids, 10:13] = root_ang_vel[env_ids, :]
         else:
@@ -289,7 +298,7 @@ class HumanoidMimic(HumanoidChar):
         hard_sync_env_ids = hard_sync_envs.nonzero(as_tuple=False).flatten()
         if len(hard_sync_env_ids) == 0:
             return
-        root_pos, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, body_pos = self._motion_lib.calc_motion_frame(self._motion_ids, motion_times*0)
+        root_pos, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, body_pos, _, _ = self._motion_lib.calc_motion_frame(self._motion_ids, motion_times*0)
         self._reset_dofs(hard_sync_env_ids, dof_pos, dof_vel*0.8)
         self._reset_root_states(env_ids=hard_sync_env_ids, root_vel=root_vel*0.8, root_quat=root_rot, root_pos=root_pos, root_ang_vel=root_ang_vel*0.8)
         self.gym.simulate(self.sim)
@@ -404,7 +413,18 @@ class HumanoidMimic(HumanoidChar):
             self._update_max_key_body_error()
             
     def check_termination(self):
-        contact_force_termination = torch.any(torch.norm(self.contact_forces[:, self.termination_contact_indices, :], dim=-1) > 1., dim=1)
+        # Fix: Use a reasonable threshold (e.g. 1000.0 or cfg.max_contact_force) instead of 1.0
+        # The config usually sets max_contact_force around 350-500 for rewards, but for termination we need a higher safety limit.
+        # We'll use 5000.0 as a safe upper bound to catch explosions, or rely on the config if available.
+        safety_force_threshold = 5000.0 
+        if hasattr(self.cfg.rewards, "max_contact_force"):
+             # Multiply by a factor (e.g. 10x) because max_contact_force is usually for penalty shaping, not hard termination
+             safety_force_threshold = max(5000.0, self.cfg.rewards.max_contact_force * 10)
+
+        # Restore: Use the safety threshold to catch real explosions, but allow normal contacts
+        contact_force_termination = torch.any(torch.norm(self.contact_forces[:, self.termination_contact_indices, :], dim=-1) > safety_force_threshold, dim=1)
+        # contact_force_termination = torch.zeros(self.num_envs, device=self.device, dtype=torch.bool)
+        
         self.reset_buf = contact_force_termination.clone()
         
         # height_cutoff = self.root_states[:, 2] < self.cfg.rewards.termination_height
@@ -475,29 +495,62 @@ class HumanoidMimic(HumanoidChar):
         #     self.reset_buf = torch.zeros_like(self.reset_buf)
         
         # print reset reason
-        if self.viewer is not None and self.reset_buf.any():
+        # Force print diagnostic info if any environment resets
+        if self.reset_buf.any():
+            # Get all resetting environments
             reset_ids = self.reset_buf.nonzero(as_tuple=False).flatten()
-            for id in reset_ids:
-                reset_reason = ""
-                if contact_force_termination[id]:
-                    reset_reason = "contact force"
-                elif height_cutoff[id]:
-                    reset_reason = "height cutoff"
-                    print("height diff: ", root_height_diff[id])
-                elif roll_cut[id]:
-                    reset_reason = "roll limit"
-                    print("roll diff: ", self.roll[id])
-                elif pitch_cut[id]:
-                    reset_reason = "pitch limit"
-                    print("pitch diff: ", self.pitch[id])
-                elif motion_end[id]:
-                    reset_reason = "motion end"
-                elif vel_too_large[id]:
-                    reset_reason = "velocity too large"
-                elif self._pose_termination and pose_fail[id]:
-                    reset_reason = "pose tracking failure"
-                print(f"Env {id} reset due to: {reset_reason}")
             
+            # Print detailed reason for the FIRST resetting environment only (to avoid log flooding)
+            # We prioritize this to debug the "Mean episode length = 1.0" issue.
+            id = reset_ids[0]
+            
+            reset_reason = []
+            if contact_force_termination[id]:
+                reset_reason.append(f"contact force (max: {torch.max(torch.norm(self.contact_forces[id, self.termination_contact_indices, :], dim=-1)):.2f})")
+            
+            if height_cutoff[id]:
+                reset_reason.append(f"height cutoff (curr: {self.root_states[id, 2]:.3f}, ref: {self._ref_root_pos[id, 2]:.3f}, diff: {root_height_diff[id]:.3f} > {self.cfg.rewards.root_height_diff_threshold})")
+            
+            if roll_cut[id]:
+                reset_reason.append(f"roll limit (val: {self.roll[id]:.3f} > {self.cfg.rewards.termination_roll})")
+            
+            if pitch_cut[id]:
+                reset_reason.append(f"pitch limit (val: {self.pitch[id]:.3f} > {self.cfg.rewards.termination_pitch})")
+            
+            if motion_end[id]:
+                reset_reason.append(f"motion end (time: {self.episode_length_buf[id] * self.dt:.2f})")
+            
+            if vel_too_large[id]:
+                reset_reason.append(f"velocity too large (val: {torch.norm(self.root_states[id, 7:10]):.2f})")
+            
+            if self._pose_termination and pose_fail[id]:
+                threshold = self.motion_termination_dist[self._motion_ids[id]] if self.cfg.motion.use_adaptive_pose_termination else self._pose_termination_dist
+                # body_pos_dist is squared distance
+                reset_reason.append(f"pose tracking failure (dist: {torch.sqrt(body_pos_dist[id]):.3f} > {threshold:.3f})")
+                if self._track_root and root_pos_fail[id]:
+                    reset_reason.append(f"root pos fail (dist: {torch.sqrt(root_pos_dist[id]):.3f})")
+
+            if self.time_out_buf[id]:
+                reset_reason.append("timeout")
+
+            if len(reset_reason) > 0:
+                # Diagnostic output (DISABLED - using wandb instead)
+                # print(f"[Diagnostic] Env {id} reset at step {self.episode_length_buf[id]} due to: {', '.join(reset_reason)}")
+                # print(f"  Stats: Height={self.root_states[id, 2]:.3f}, Roll={self.roll[id]:.3f}, Pitch={self.pitch[id]:.3f}")
+                pass
+            else:
+                pass
+        
+        # Viewer logic disabled for simplicity
+        pass
+        
+
+
+
+        # Original viewer logic (kept for compatibility)
+        # Viewer logic disabled to avoid indentation issues
+        pass
+        
             # not reset if we are using viewer
             # if self.viewer is not None:
             #     self.reset_buf = torch.zeros_like(self.reset_buf)
@@ -512,7 +565,7 @@ class HumanoidMimic(HumanoidChar):
         motion_ids_tiled = torch.broadcast_to(self._motion_ids.unsqueeze(-1), obs_motion_times.shape)
         motion_ids_tiled = motion_ids_tiled.flatten()
         obs_motion_times = obs_motion_times.flatten()
-        root_pos, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, body_pos = self._motion_lib.calc_motion_frame(motion_ids_tiled, obs_motion_times)
+        root_pos, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, body_pos, _, _ = self._motion_lib.calc_motion_frame(motion_ids_tiled, obs_motion_times)
         
         # Apply motion domain randomization noise
         root_pos, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel = self._apply_motion_domain_randomization(

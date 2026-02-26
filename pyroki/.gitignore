@@ -1,0 +1,19 @@
+# Data directories (too large)
+data/
+outputs_new/
+
+# Blender tools (318M, too large)
+tools/
+
+# Asset files (95M, too large)
+assets/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Temporary files
+*.log
+*.hdf5

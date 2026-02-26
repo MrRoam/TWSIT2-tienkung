@@ -42,10 +42,7 @@ def train(args):
     args.headless = True
     
     log_pth = LEGGED_GYM_ROOT_DIR + "/logs/{}/".format(args.proj_name) + args.exptid
-    try:
-        os.makedirs(log_pth)
-    except:
-        pass
+    os.makedirs(log_pth, exist_ok=True)
     
     if args.debug:
         mode = "disabled"
@@ -55,8 +52,8 @@ def train(args):
         args.headless = False
         # args.headless = True
     else:
-        mode = "online"
-    
+        mode = "offline"  # 使用离线模式，不依赖网络连接
+
     if args.no_wandb:
         mode = "disabled"
         

@@ -1,0 +1,218 @@
+# LaFan1 Dataset Configuration for Tienkung Robot (Stable Motions Only)
+# Excludes ground and fall/getup motions to avoid height cutoff issues
+# Total: 62 motion files (removed 17 problematic files)
+root_path: /root/TWIST2/pyroki/outputs_new
+motions:
+  # Aiming motions (5 files)
+  - file: aiming1_subject1.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming1_subject4.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming2_subject2.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming2_subject3.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming2_subject5.pkl
+    weight: 1.0
+    description: aiming motion
+  
+  # Dance motions (7 files)
+  - file: dance1_subject1.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance1_subject2.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance1_subject3.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject1.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject2.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject3.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject4.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject5.pkl
+    weight: 1.0
+    description: dance motion
+  
+  # Fight motions (3 files)
+  - file: fight1_subject2.pkl
+    weight: 1.0
+    description: fight motion
+  - file: fight1_subject3.pkl
+    weight: 1.0
+    description: fight motion
+  - file: fight1_subject5.pkl
+    weight: 1.0
+    description: fight motion
+  
+  # Fight and sports motions (2 files)
+  - file: fightAndSports1_subject1.pkl
+    weight: 1.0
+    description: fight and sports
+  - file: fightAndSports1_subject4.pkl
+    weight: 1.0
+    description: fight and sports
+  
+  # Jump motions (3 files)
+  - file: jumps1_subject1.pkl
+    weight: 1.0
+    description: jump motion
+  - file: jumps1_subject2.pkl
+    weight: 1.0
+    description: jump motion
+  - file: jumps1_subject5.pkl
+    weight: 1.0
+    description: jump motion
+  
+  # Multiple actions motions (4 files)
+  - file: multipleActions1_subject1.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: multipleActions1_subject2.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: multipleActions1_subject3.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: multipleActions1_subject4.pkl
+    weight: 1.0
+    description: multiple actions
+  
+  # Obstacles motions (17 files)
+  - file: obstacles1_subject1.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles1_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles1_subject5.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles2_subject1.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles2_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles2_subject5.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles3_subject3.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles3_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles4_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles4_subject3.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles4_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles5_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles5_subject3.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles5_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles6_subject1.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles6_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles6_subject5.pkl
+    weight: 1.0
+    description: obstacles
+  
+  # Push motions (4 files) - excluded pushAndFall to avoid low-height frames
+  - file: push1_subject2.pkl
+    weight: 1.0
+    description: push motion
+  - file: pushAndStumble1_subject2.pkl
+    weight: 1.0
+    description: push and stumble
+  - file: pushAndStumble1_subject3.pkl
+    weight: 1.0
+    description: push and stumble
+  - file: pushAndStumble1_subject5.pkl
+    weight: 1.0
+    description: push and stumble
+  
+  # Run motions (4 files)
+  - file: run1_subject2.pkl
+    weight: 1.0
+    description: run motion
+  - file: run1_subject5.pkl
+    weight: 1.0
+    description: run motion
+  - file: run2_subject1.pkl
+    weight: 1.0
+    description: run motion
+  - file: run2_subject4.pkl
+    weight: 1.0
+    description: run motion
+  
+  # Sprint motions (2 files)
+  - file: sprint1_subject2.pkl
+    weight: 1.0
+    description: sprint motion
+  - file: sprint1_subject4.pkl
+    weight: 1.0
+    description: sprint motion
+  
+  # Walk motions (13 files)
+  - file: walk1_subject1.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk1_subject2.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk1_subject5.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk2_subject1.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk2_subject3.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk2_subject4.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject1.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject2.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject3.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject4.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject5.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk4_subject1.pkl
+    weight: 1.0
+    description: walk motion

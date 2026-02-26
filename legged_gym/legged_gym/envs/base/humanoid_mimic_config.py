@@ -1,7 +1,6 @@
 from .humanoid_char_config import HumanoidCharCfg
 from .base_config import BaseConfig
 
-
 class HumanoidMimicCfg(HumanoidCharCfg):
     class env(HumanoidCharCfg.env):
         enable_early_termination = True
@@ -16,7 +15,6 @@ class HumanoidMimicCfg(HumanoidCharCfg):
         global_obs = True
         track_root = True
         dof_err_w = None
-        
 
 class HumanoidMimicCfgPPO(BaseConfig):
     seed = 1
@@ -25,22 +23,21 @@ class HumanoidMimicCfgPPO(BaseConfig):
         actor_hidden_dims = [512, 256, 128]
         critic_hidden_dims = [512, 256, 128]
         priv_encoder_dims = [64, 20]
-        activation = 'elu' # can be elu, relu, selu, crelu, lrelu, tanh, sigmoid
+        activation = 'elu' 
         tanh_encoder_output = False
         fix_action_std = False
         obs_context_len = 0
         
     class algorithm:
-        # training params
         grad_penalty_coef = 0.0
         value_loss_coef = 1.0
         use_clipped_value_loss = True
         clip_param = 0.2
         entropy_coef = 0.01
         num_learning_epochs = 5
-        num_mini_batches = 4 # mini batch size = num_envs*nsteps / nminibatches
-        learning_rate = 2e-4 #1.e-3 #5.e-4
-        schedule = 'adaptive' # could be adaptive, fixed
+        num_mini_batches = 4 
+        learning_rate = 2e-4 
+        schedule = 'adaptive' 
         gamma = 0.99
         lam = 0.95
         desired_kl = 0.008
@@ -54,16 +51,12 @@ class HumanoidMimicCfgPPO(BaseConfig):
         policy_class_name = 'ActorCritic'
         algorithm_class_name = 'PPO'
         runner_class_name = 'OnPolicyRunner'
-        num_steps_per_env = 24 # per iteration
-        max_iterations = 20000 # number of policy updates
-
-        # logging
-        save_interval = 100 # check for potential saves every this many iterations
+        num_steps_per_env = 24 
+        max_iterations = 20000 
+        save_interval = 100 
         experiment_name = 'test'
         run_name = ''
-        # load and resume
         resume = False
-        load_run = -1 # -1 = last run
-        checkpoint = -1 # -1 = last saved model
-        resume_path = None # updated from load_run and chkpt
-        
+        load_run = -1 
+        checkpoint = -1 
+        resume_path = None 

@@ -260,9 +260,10 @@ class DAggerRunner:
         if len(locs['rewbuffer']) > 0:
             wandb_dict['Train/mean_reward'] = statistics.mean(locs['rewbuffer'])
             wandb_dict['Train/mean_episode_length'] = statistics.mean(locs['lenbuffer'])
-            
-        wandb.log(wandb_dict, step=locs['it'])
 
+        if wandb.run is not None:
+            wandb.log(wandb_dict, step=locs['it'])
+        
         str = f" \033[1m Learning iteration {locs['it']}/{self.current_learning_iteration + locs['num_learning_iterations']} \033[0m "
 
         average_episode_length = f"""{'Average_episode_length:':>{pad}} {locs['average_episode_length']:.4f}\n"""

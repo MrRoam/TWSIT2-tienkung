@@ -1,0 +1,1522 @@
+# This is the G1 robot configuration backed up from original HEAD
+# Use this config for G1 robot training
+# Current twist2_dataset.yaml is configured for Tienkung robot
+
+# root_path: /home/yanjieze/projects/g1_wbc/TWIST-dev/motion_data/TWIST2_full
+root_path: /home/ANT.AMAZON.COM/yanjieze/lab42/src/FAR-TWIST/motion_data
+motions:
+- file: OMOMO_g1_GMR/sub1_clothesstand_000.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_001.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_002.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_003.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_004.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_005.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_006.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_007.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_008.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_009.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_010.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_011.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_012.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_013.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_014.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_015.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_016.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_017.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_018.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_019.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_020.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_021.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_022.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_023.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_024.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_025.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_026.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_027.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_028.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_029.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_030.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_031.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_032.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_033.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_034.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_035.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_036.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_037.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_038.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_039.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_040.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_041.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_042.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_043.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_044.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_045.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_046.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_047.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_048.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_049.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_050.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_051.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_052.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_053.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_054.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_055.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_056.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_057.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_058.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_059.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_060.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_061.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_062.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_063.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_064.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_065.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_066.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_067.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_068.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_069.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_070.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_071.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_072.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_073.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_074.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_075.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_076.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_077.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_078.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_079.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_080.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_081.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_082.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_083.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_084.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_085.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_086.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_087.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_088.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_089.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_090.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_091.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_092.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_093.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_094.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_095.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_096.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_097.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_098.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_099.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_clothesstand_100.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_000.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_001.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_002.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_003.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_004.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_005.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_006.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_007.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_008.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_009.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_010.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_011.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_012.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_013.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_014.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_015.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_016.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_017.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_018.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_019.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_020.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_021.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_022.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_023.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_024.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_025.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_026.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_027.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_028.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_029.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_030.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_031.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_032.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_033.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_034.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_035.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_036.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_037.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_038.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_039.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_040.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_041.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_042.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_043.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_044.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_045.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_046.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_047.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_048.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_049.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_050.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_051.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_052.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_053.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_054.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_055.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_056.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_057.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_058.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_059.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_060.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_061.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_062.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_063.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_064.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_065.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_066.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_067.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_068.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_069.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_070.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_071.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_072.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_073.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_074.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_075.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_076.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_077.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_078.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_079.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_080.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_081.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_082.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_083.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_084.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_085.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_086.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_087.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_088.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_089.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_090.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_091.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_092.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_093.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_094.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_095.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_096.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_097.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_098.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_099.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_dance_100.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_000.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_001.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_002.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_003.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_004.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_005.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_006.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_007.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_008.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_009.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_010.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_011.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_012.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_013.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_014.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_015.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_016.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_017.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_018.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_019.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_020.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_021.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_022.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_023.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_024.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_025.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_026.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_027.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_028.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_029.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_030.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_031.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_032.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_033.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_034.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_035.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_036.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_037.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_038.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_039.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_040.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_041.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_042.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_043.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_044.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_045.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_046.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_047.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_048.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_049.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_050.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_051.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_052.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_053.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_054.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_055.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_056.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_057.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_058.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_059.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_060.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_061.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_062.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_063.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_064.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_065.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_066.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_067.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_068.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_069.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_070.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_071.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_072.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_073.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_074.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_075.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_076.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_077.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_078.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_079.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_080.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_081.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_082.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_083.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_084.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_085.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_086.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_087.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_088.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_089.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_090.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_091.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_092.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_093.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_094.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_095.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_096.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_097.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_098.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_099.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_emote_100.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_000.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_001.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_002.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_003.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_004.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_005.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_006.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_007.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_008.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_009.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_010.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_011.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_012.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_013.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_014.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_015.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_016.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_017.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_018.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_019.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_020.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_021.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_022.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_023.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_024.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_025.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_026.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_027.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_028.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_029.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_030.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_031.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_032.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_033.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_034.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_035.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_036.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_037.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_038.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_039.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_040.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_041.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_042.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_043.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_044.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_045.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_046.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_047.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_048.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_049.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_050.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_051.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_052.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_053.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_054.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_055.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_056.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_057.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_058.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_059.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_060.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_061.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_062.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_063.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_064.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_065.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_066.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_067.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_068.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_069.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_070.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_071.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_072.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_073.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_074.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_075.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_076.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_077.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_078.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_079.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_080.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_081.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_082.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_083.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_084.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_085.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_086.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_087.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_088.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_089.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_090.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_091.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_092.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_093.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_094.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_095.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_096.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_097.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_098.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_099.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_interaction_100.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_000.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_001.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_002.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_003.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_004.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_005.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_006.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_007.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_008.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_009.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_010.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_011.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_012.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_013.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_014.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_015.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_016.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_017.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_018.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_019.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_020.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_021.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_022.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_023.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_024.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_025.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_026.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_027.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_028.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_029.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_030.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_031.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_032.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_033.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_034.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_035.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_036.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_037.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_038.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_039.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_040.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_041.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_042.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_043.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_044.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_045.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_046.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_047.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_048.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_049.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_050.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_051.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_052.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_053.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_054.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_055.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_056.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_057.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_058.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_059.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_060.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_061.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_062.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_063.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_064.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_065.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_066.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_067.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_068.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_069.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_070.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_071.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_072.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_073.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_074.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_075.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_076.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_077.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_078.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_079.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_080.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_081.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_082.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_083.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_084.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_085.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_086.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_087.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_088.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_089.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_090.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_091.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_092.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_093.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_094.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_095.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_096.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_097.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_098.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_099.pkl
+  weight: 1.0
+  description: general movement
+- file: OMOMO_g1_GMR/sub1_walk_100.pkl
+  weight: 1.0
+  description: general movement

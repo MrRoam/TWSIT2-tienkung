@@ -123,13 +123,32 @@ class OnPolicyRunnerMimic:
             )
 
         self.learn = self.learn_RL
-            
+         
         # Log
         self.log_dir = log_dir
         self.writer = None
         self.tot_timesteps = 0
         self.tot_time = 0
         self.current_learning_iteration = 0
+         
+        # Open log file for writing training metrics
+        self.log_file_path = os.path.join(log_dir, 'evaluations.txt')
+        self.log_file = open(self.log_file_path, 'a', encoding='utf-8')
+        
+        # Log file cleanup handler (ensure file is closed on exit)
+        import atexit
+        atexit.register(self.close_log_file)
+        
+    def close_log_file(self):
+        """Close the log file properly"""
+        if self.log_file is not None:
+            try:
+                self.log_file.flush()
+                self.log_file.close()
+                self.log_file = None
+            except Exception as e:
+                print(f"[WARNING] Error closing log file: {e}")
+        
         
 
     def learn_RL(self, num_learning_iterations, init_at_random_ep_len=False):
@@ -314,7 +333,11 @@ class OnPolicyRunnerMimic:
             # wandb_dict['Train/mean_reward/time', statistics.mean(locs['rewbuffer']), self.tot_time)
             # wandb_dict['Train/mean_episode_length/time', statistics.mean(locs['lenbuffer']), self.tot_time)
 
-        wandb.log(wandb_dict, step=locs['it'])
+        try:
+            if wandb.run is not None:
+                wandb.log(wandb_dict, step=locs['it'])
+        except Exception as e:
+            pass # print(f"Wandb log failed: {e}")
 
         str = f" \033[1m Learning iteration {locs['it']}/{self.current_learning_iteration + locs['num_learning_iterations']} \033[0m "
 
@@ -359,9 +382,9 @@ class OnPolicyRunnerMimic:
                        f"""{'Total timesteps:':>{pad}} {self.tot_timesteps}\n"""
                        f"""{'Iteration time:':>{pad}} {iteration_time:.2f}s\n"""
                        f"""{'Total time:':>{pad}} {self.tot_time:.2f}s\n"""
-                       f"""{'ETA:':>{pad}} {mins:.0f} mins {secs:.1f} s\n""")
+                        f"""{'ETA:':>{pad}} {mins:.0f} mins {secs:.1f} s\n""")
         print(log_string)
-
+        
     def save(self, path, infos=None):
         if self.normalize_obs:
             state_dict = {
@@ -382,7 +405,7 @@ class OnPolicyRunnerMimic:
         torch.save(state_dict, path)
         
         # Save to wandb only if enabled in config
-        if getattr(self.cfg, 'save_to_wandb', True):  # Default to True for backward compatibility
+        if wandb.run is not None and getattr(self.cfg, 'save_to_wandb', True):  # Default to True for backward compatibility
             wandb.save(path, base_path=os.path.dirname(path))
             print(f"Saved model to {path} as well as to wandb")
         else:

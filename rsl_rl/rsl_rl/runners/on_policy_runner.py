@@ -43,7 +43,8 @@ import datetime
 
 import numpy as np
 from rsl_rl.algorithms import PPO
-from rsl_rl.modules import *
+from rsl_rl.modules.actor_critic import ActorCritic
+# from rsl_rl.modules import *
 from rsl_rl.storage.replay_buffer import ReplayBuffer
 from rsl_rl.env import VecEnv
 import sys
@@ -321,8 +322,9 @@ class OnPolicyRunner:
             # wandb_dict['Train/mean_reward/time', statistics.mean(locs['rewbuffer']), self.tot_time)
             # wandb_dict['Train/mean_episode_length/time', statistics.mean(locs['lenbuffer']), self.tot_time)
 
-        wandb.log(wandb_dict, step=locs['it'])
-
+        if wandb.run is not None:
+            wandb.log(wandb_dict, step=locs['it'])
+        
         str = f" \033[1m Learning iteration {locs['it']}/{self.current_learning_iteration + locs['num_learning_iterations']} \033[0m "
 
         scale_str = f"""{'Regularization_scale:':>{pad}} {locs['regularization_scale']:.4f}\n"""

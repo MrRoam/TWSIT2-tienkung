@@ -302,7 +302,7 @@ class TienkungMimicCfg(HumanoidMimicCfg):
                       "elbow_r_link", "right_link4", "R_hand_base_link"]
         upper_key_bodies = []
         
-        motion_file = f"{LEGGED_GYM_ROOT_DIR}/motion_data_configs/lafan1_tienkung_stable.yaml"
+        motion_file = f"{LEGGED_GYM_ROOT_DIR}/motion_data_configs/lafan1_tienkung_train.yaml"
         reset_consec_frames = 30
  
 

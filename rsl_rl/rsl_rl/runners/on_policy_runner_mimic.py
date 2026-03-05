@@ -384,6 +384,9 @@ class OnPolicyRunnerMimic:
                        f"""{'Total time:':>{pad}} {self.tot_time:.2f}s\n"""
                         f"""{'ETA:':>{pad}} {mins:.0f} mins {secs:.1f} s\n""")
         print(log_string)
+        if self.log_file is not None:
+            self.log_file.write(log_string)
+            self.log_file.flush()
         
     def save(self, path, infos=None):
         if self.normalize_obs:

@@ -1,0 +1,158 @@
+root_path: /root/TWIST2/pyroki/outputs_new
+motions:
+  - file: aiming1_subject1.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming1_subject4.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming2_subject2.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: aiming2_subject3.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: dance1_subject1.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance1_subject2.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance1_subject3.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject1.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject2.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject3.pkl
+    weight: 1.0
+    description: dance motion
+  - file: dance2_subject5.pkl
+    weight: 1.0
+    description: dance motion
+  - file: fight1_subject2.pkl
+    weight: 1.0
+    description: fight motion
+  - file: fight1_subject5.pkl
+    weight: 1.0
+    description: fight motion
+  - file: fightAndSports1_subject1.pkl
+    weight: 1.0
+    description: fight and sports
+  - file: jumps1_subject1.pkl
+    weight: 1.0
+    description: jump motion
+  - file: jumps1_subject5.pkl
+    weight: 1.0
+    description: jump motion
+  - file: multipleActions1_subject1.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: multipleActions1_subject2.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: multipleActions1_subject3.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: obstacles1_subject1.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles1_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles1_subject5.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles2_subject1.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles2_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles2_subject5.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles3_subject3.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles4_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles4_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles5_subject2.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles5_subject3.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles5_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles6_subject1.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles6_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles6_subject5.pkl
+    weight: 1.0
+    description: obstacles
+  - file: push1_subject2.pkl
+    weight: 1.0
+    description: push motion
+  - file: pushAndStumble1_subject2.pkl
+    weight: 1.0
+    description: push and stumble
+  - file: pushAndStumble1_subject5.pkl
+    weight: 1.0
+    description: push and stumble
+  - file: run1_subject2.pkl
+    weight: 1.0
+    description: run motion
+  - file: run1_subject5.pkl
+    weight: 1.0
+    description: run motion
+  - file: run2_subject1.pkl
+    weight: 1.0
+    description: run motion
+  - file: sprint1_subject2.pkl
+    weight: 1.0
+    description: sprint motion
+  - file: walk1_subject1.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk1_subject2.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk1_subject5.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk2_subject1.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk2_subject3.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk2_subject4.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject1.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject2.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject3.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk3_subject4.pkl
+    weight: 1.0
+    description: walk motion
+  - file: walk4_subject1.pkl
+    weight: 1.0
+    description: walk motion

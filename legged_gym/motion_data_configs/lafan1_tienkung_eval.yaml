@@ -1,0 +1,38 @@
+root_path: /root/TWIST2/pyroki/outputs_new
+motions:
+  - file: aiming2_subject5.pkl
+    weight: 1.0
+    description: aiming motion
+  - file: dance2_subject4.pkl
+    weight: 1.0
+    description: dance motion
+  - file: fight1_subject3.pkl
+    weight: 1.0
+    description: fight motion
+  - file: fightAndSports1_subject4.pkl
+    weight: 1.0
+    description: fight and sports
+  - file: jumps1_subject2.pkl
+    weight: 1.0
+    description: jump motion
+  - file: multipleActions1_subject4.pkl
+    weight: 1.0
+    description: multiple actions
+  - file: obstacles3_subject4.pkl
+    weight: 1.0
+    description: obstacles
+  - file: obstacles4_subject3.pkl
+    weight: 1.0
+    description: obstacles
+  - file: pushAndStumble1_subject3.pkl
+    weight: 1.0
+    description: push and stumble
+  - file: run2_subject4.pkl
+    weight: 1.0
+    description: run motion
+  - file: sprint1_subject4.pkl
+    weight: 1.0
+    description: sprint motion
+  - file: walk3_subject5.pkl
+    weight: 1.0
+    description: walk motion

@@ -55,7 +55,8 @@ class BaseTask():
 
         # graphics device for rendering, -1 for no rendering
         self.graphics_device_id = self.sim_device_id
-        if self.headless == True:
+        record_video = hasattr(cfg, "env") and hasattr(cfg.env, "record_video") and cfg.env.record_video
+        if self.headless == True and not record_video:
             self.graphics_device_id = -1
 
         self.num_envs = cfg.env.num_envs

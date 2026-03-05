@@ -20,7 +20,7 @@ bash teleop_motion_gen.sh
 ```
 2.8 test sim2sim first
 ```bash
-bash sim2sim.sh
+bash ../scripts/sim2sim.sh
 ```
 
 
@@ -32,7 +32,7 @@ bash teleop_data_record.sh
 
 3.2 start sim2real
 ```bash
-bash sim2real.sh
+bash ../scripts/sim2real.sh
 ```
 
 # 按键说明

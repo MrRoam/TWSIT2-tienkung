@@ -191,14 +191,14 @@ And we have also provided full motion datasets to ensure you can successfully tr
 
 **1**. Training TWIST2 general motion tracker:
 ```bash
-bash train.sh 1021_twist2 cuda:0
+bash scripts/train.sh 1021_twist2 cuda:0
 ```
 - arg 1: policy expid
 - arg 2: cuda device id
 
 **2**. Export policy to onnx model:
 ```bash
-bash to_onnx.sh $YOUR_POLICY_PATH
+bash scripts/to_onnx.sh $YOUR_POLICY_PATH
 ```
 - arg 1: your policy path. you should find the `.pt` file's path.
 
@@ -207,13 +207,13 @@ bash to_onnx.sh $YOUR_POLICY_PATH
 
 [If this is your first time to run this script] you need to warm up the redis server by running the high-level motion server.
 ```bash
-bash run_motion_server.sh
+bash scripts/run_motion_server.sh
 ```
-You can also just select one motion file from our motion dataset by modifying the `motion_file` in `run_motion_server.sh`.
+You can also just select one motion file from our motion dataset by modifying the `motion_file` in `scripts/run_motion_server.sh`.
 
 Then, you can run the low-level controller server in simulation.
 ```bash
-bash sim2sim.sh
+bash scripts/sim2sim.sh
 ```
 - This will start a simulation that runs the low-level controller only.
 - This is because we separate the high-level control (i.e., teleop) from the low-level control (i.e., RL policy).
@@ -237,20 +237,20 @@ We have provided two choices for you:
 
 1) for offline motion streaming:
 ```bash
-bash run_motion_server.sh
+bash scripts/run_motion_server.sh
 ```
 
 
 2) for online PICO teleop:
 ```bash
-bash teleop.sh
+bash scripts/teleop.sh
 ```
 
 
 
  
 
-**4**. Sim2real verification. If you are not familiar with the deployment on physical robot, you can refer to [unitree_g1.md](./unitree_g1.md) or [unitree_g1.zh.md](./unitree_g1.zh.md) for more details.
+**4**. Sim2real verification. If you are not familiar with the deployment on physical robot, you can refer to [unitree_g1.md](./doc/unitree_g1.md) or [unitree_g1.zh.md](./doc/unitree_g1.zh.md) for more details.
 
 More specifically, the pipeline for sim2real deploy is:
 1. start the robot and connect the robot and your laptop via an Ethernet cable.
@@ -260,9 +260,9 @@ More specifically, the pipeline for sim2real deploy is:
 5. now you should be able to see the robot joints in the damping state.
 6. then you can run the low-level controller by:
 ```bash
-bash sim2real.sh
+bash scripts/sim2real.sh
 ```
-- please set the network interface name to your own that connects to the robot in `sim2real.sh`.
+- please set the network interface name to your own that connects to the robot in `scripts/sim2real.sh`.
 
 
 
@@ -270,17 +270,17 @@ bash sim2real.sh
 Similarly, you run the low-level controller first and then control the robot via high-level motion server, i.e.,
 1) offline motion streaming:
 ```bash
-bash run_motion_server.sh
+bash scripts/run_motion_server.sh
 ```
 2) or online PICO teleop:
 ```bash
-bash teleop.sh
+bash scripts/teleop.sh
 ```
 
 
-**5**. GUI interface for everything. Check `gui.sh` for more details.
+**5**. GUI interface for everything. Check `scripts/gui.sh` for more details.
 ```bash
-bash gui.sh
+bash scripts/gui.sh
 ```
 You should be able to
 1) run the low-level controller in simulation

@@ -650,11 +650,11 @@ class TeleopControlCenter:
         low_frame.grid_columnconfigure(0, weight=1)
         
         self.sim2sim_panel = TerminalPanel(low_frame, "Sim2Sim Deploy",
-                                          "bash sim2sim.sh", self.colors)
+                                          "bash scripts/sim2sim.sh", self.colors)
         self.sim2sim_panel.frame.grid(row=0, column=0, sticky="nsew", pady=(0, 5))
         
         self.sim2real_panel = TerminalPanel(low_frame, "Sim2Real Deploy", 
-                                           "bash sim2real.sh", self.colors,
+                                           "bash scripts/sim2real.sh", self.colors,
                                            custom_kill_cmd="pkill -f server_low_level_g1_real_future.py")
         self.sim2real_panel.frame.grid(row=1, column=0, sticky="nsew", pady=(5, 0))
         
@@ -667,11 +667,11 @@ class TeleopControlCenter:
         high_frame.grid_columnconfigure(0, weight=1)
         
         self.motion_panel = TerminalPanel(high_frame, "Offline Motion",
-                                         "bash run_motion_server.sh", self.colors)
+                                         "bash scripts/run_motion_server.sh", self.colors)
         self.motion_panel.frame.grid(row=0, column=0, sticky="nsew", pady=(0, 3))
         
         self.teleop_panel = TerminalPanel(high_frame, "Online Teleop",
-                                         "bash teleop.sh", self.colors)
+                                         "bash scripts/teleop.sh", self.colors)
         self.teleop_panel.frame.grid(row=1, column=0, sticky="nsew", pady=(3, 3))
         
         self.visuomotor_panel = TerminalPanel(high_frame, "Visuomotor Policy Deploy",

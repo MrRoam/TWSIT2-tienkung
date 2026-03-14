@@ -7,7 +7,7 @@ class TienkungMimicCfg(HumanoidMimicCfg):
         tar_motion_steps_priv = [1, 5, 10, 15, 20, 25, 30, 35, 40, 45,
                          50, 55, 60, 65, 70, 75, 80, 85, 90, 95,]
         
-        num_envs = 1024 # Reduced from 2048 to prevent OOM
+        num_envs = 2048
         num_actions = 38
         n_priv = 0
         n_mimic_obs = 9 + 38

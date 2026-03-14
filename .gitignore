@@ -9,8 +9,11 @@ cmu_fbx_all/
 *ipynb
 npy
 *.pkl
+*.onnx
+*.c3d
+*.bvh
 phc/
-
+pyroki/outputs/raw_data/
 motion_data/
 
 ignore/
@@ -89,7 +92,7 @@ log.txt
 # Data directories
 data/
 
-assets/Tienkung/
+assets
 
 # Model checkpoints and temporary files (additional)
 *.tgz
@@ -125,3 +128,12 @@ twist2_training_README*.md
 # Duplicate libraries
 _pyroki_lib/
 pose/
+
+nul
+
+# ignore everything in assets
+assets/*
+
+# but keep Tienkung
+!assets/Tienkung/
+!assets/Tienkung/**

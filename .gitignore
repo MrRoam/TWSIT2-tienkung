@@ -1,13 +1,13 @@
 isaacgym/
 .ipynb_checkpoints/
 .vscode/
-*img
+*.img
 *__pycache__*
 fbx/
 cmu_fbx_all/
 *zip
 *ipynb
-npy
+*.npy
 *.pkl
 *.onnx
 *.c3d
@@ -105,13 +105,13 @@ legged_gym/5.
 legged_gym/=
 legged_gym/self.*
 
-# Debug scripts
+# Debug scripts (exclude important verification tools)
 debug_*.py
 test_*.py
 inspect_*.py
-verify_*.py
-check_*.py
-quick_*.py
+verify_*.py  
+check_*.py  
+quick_*.py   
 
 # Documentation and guides (keep repo clean)
 AGENTS.md
@@ -127,7 +127,6 @@ twist2_training_README*.md
 
 # Duplicate libraries
 _pyroki_lib/
-pose/
 
 nul
 

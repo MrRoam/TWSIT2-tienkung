@@ -1,0 +1,70 @@
+motion_base_dir: 'data/motion_base'
+motion_type: "MocapRaw"
+motion_sets:
+  {
+  "mixamo": ["MixAmo"],
+  "lafan1": ["LaFan1", "Motorica", "ZeroEggs"],
+  "smpl": ["ACCAD", "BMLhandball", "BMLmovi", "BioMotionLab_NTroje", "CMU", "DFaust_67",
+           "DanceDB", "EKUT", "Eyes_Japan_Dataset", "MPI_HDM05", "HumanEva", "KIT", "MPI_mosh",
+           "MPI_Limits", "SFU", "SSM_synced", "TCD_handMocap", "TotalCapture", "Transitions_mocap",],
+  "smplx": ["ACCAD_N", "CMU_N", "TRAM_Data"], 
+  "actorcore": ["ActorCore", ],
+  }
+motion_sets_filter: ["Motorica", "ZeroEggs"]
+#motion_files_filter: "data/motion_base/MocapRaw/amass_copycat_occlusion_v3.pkl"
+motion_files_filter: null
+smplx_body_model_path: "data/body_models"
+resolve_type: "InvKinematics"
+vis_motion: True
+save_motion: True
+zero_root_origin: False
+enforce_retarget: False
+enable_flip: False
+debug_visualize: False
+
+
+# actor's feet name for contact detection
+actor_feet_dict:
+  "mixamo": ["mixamorig:LeftFoot", "mixamorig:RightFoot"]
+  "actorcore": ["CC_Base_L_Foot", "CC_Base_R_Foot"]
+  "smplx": ["left_foot", "right_foot"]
+
+# robot's feet name for contact detection
+# robot_feet_dict: ["left_ankle_roll", "right_ankle_roll"]
+robot_feet_dict: ["ankle_roll_l_link", "ankle_roll_r_link"]
+
+# actor's keybody joints
+mixamo_keypoints: ["mixamorig:Hips", "mixamorig:Spine2",
+                      "mixamorig:LeftUpLeg", "mixamorig:LeftLeg", "mixamorig:LeftFoot", 
+                      "mixamorig:RightUpLeg", "mixamorig:RightLeg", "mixamorig:RightFoot", 
+                      "mixamorig:LeftArm", "mixamorig:LeftForeArm", "mixamorig:LeftHand", 
+                      "mixamorig:RightArm", "mixamorig:RightForeArm", "mixamorig:RightHand"]
+actorcore_keypoints: ["CC_Base_Hip", "CC_Base_Spine02",
+                      "CC_Base_L_Thigh", "CC_Base_L_Calf", "CC_Base_L_Foot", 
+                      "CC_Base_R_Thigh", "CC_Base_R_Calf", "CC_Base_R_Foot", 
+                      "CC_Base_L_Upperarm", "CC_Base_L_Forearm", "CC_Base_L_Hand", 
+                      "CC_Base_R_Upperarm", "CC_Base_R_Forearm", "CC_Base_R_Hand"]
+smplx_keypoints: ["pelvis", "spine2",
+                  "left_hip", "left_knee", "left_foot", 
+                  "right_hip", "right_knee", "right_foot", 
+                  "left_shoulder", "left_elbow", "left_wrist", 
+                  "right_shoulder", "right_elbow", "right_wrist"]
+
+# robot's keybody joints
+phybot_mini_mark2_keypoints: ["torso", "waist_yaw", 
+                              "left_hip_roll", "left_knee", "left_ankle_roll", 
+                              "right_hip_roll", "right_knee", "right_ankle_roll",
+                              "left_shoulder_roll", "left_elbow_pitch", "left_wrist",
+                              "right_shoulder_roll", "right_elbow_pitch", "right_wrist"]
+
+phybot_mark3_keypoints: ["base_link", "waist_roll",
+                         "left_hip_roll", "left_knee", "left_ankle_roll", 
+                         "right_hip_roll", "right_knee", "right_ankle_roll",
+                         "left_shoulder_roll", "left_elbow_pitch", "left_wrist",
+                         "right_shoulder_roll", "right_elbow_pitch", "right_wrist"]
+
+walker_tienkung_ei_keypoints : ["pelvis", "waist_yaw_link", 
+                                "hip_roll_l_link", "knee_pitch_l_link", "ankle_roll_l_link", 
+                                "hip_roll_r_link", "knee_pitch_r_link", "ankle_roll_r_link",
+                                "shoulder_roll_l_link", "elbow_pitch_l_link", "wrist_roll_l_link",
+                                "shoulder_roll_r_link", "elbow_pitch_r_link", "wrist_roll_r_link"]

@@ -1,0 +1,27 @@
+# @package _global_
+
+frame_tasks: {"pelvis": [100, 10], "waist_yaw_link": [0, 20],
+               "hip_roll_l_link": [0, 10], "knee_pitch_l_link": [5, 5], "ankle_roll_l_link": [20, 10],
+               "hip_roll_r_link": [0, 10], "knee_pitch_r_link": [5, 5], "ankle_roll_r_link": [20, 10],
+               "shoulder_roll_l_link": [0, 3], "elbow_pitch_l_link": [0, 10], "wrist_roll_l_link": [30, 0],
+               "shoulder_roll_r_link": [0, 3], "elbow_pitch_r_link": [0, 10], "wrist_roll_r_link": [30, 0]}
+
+robot_root_name: "pelvis"
+
+# for anchor joint placement
+robot_anchor_joint_dict:
+  mixamo:
+    - ["hip_roll_l_link"]
+    - ["hip_roll_r_link"]
+    - ["shoulder_pitch_l_link"]
+    - ["shoulder_pitch_r_link"]
+  actorcore:
+    - ["hip_roll_l_link"]
+    - ["hip_roll_r_link"]
+    - ["shoulder_pitch_l_link"]
+    - ["shoulder_pitch_r_link"]
+  smplx:
+    - ["hip_roll_l_link"]
+    - ["hip_roll_r_link"]
+    - ["shoulder_pitch_l_link", "shoulder_roll_l_link"]
+    - ["shoulder_pitch_r_link", "shoulder_roll_r_link"]

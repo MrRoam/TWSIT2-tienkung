@@ -5,10 +5,16 @@ Displays BVH skeleton (balls and sticks) next to the robot model
 to visually compare the retargeting quality.
 
 Usage:
-    python pyroki_repro/visualize_comparison.py \
-        --bvh data/raw_data/lafan1/walk1_subject1.bvh \
-        --pkl pyroki_repro/output_full.pkl \
-        --urdf Tiangong/pro_urdf_publish/pro_urdf_publish/urdf/humanoid.urdf
+    python pyroki/visualize_comparison.py \
+        --bvh pyroki/data/raw_data/lafan1/walk1_subject1.bvh \
+        --pkl pyroki/outputs/walk1_subject1.pkl \
+        --urdf pyroki/assets/urdf/humanoid_simple.urdf
+
+    # Windows absolute path example:
+    python pyroki/visualize_comparison.py \
+        --bvh D:/Desktop/TWIST2/pyroki/data/raw_data/lafan1/walk1_subject1.bvh \
+        --pkl D:/Desktop/TWIST2/pyroki/outputs/walk1_subject1.pkl \
+        --urdf D:/Desktop/TWIST2/pyroki/assets/urdf/humanoid_simple.urdf
 """
 
 import sys
@@ -29,6 +35,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from utils.bvh_loader import BVHLoader
 from utils.bvh_fk import compute_bvh_fk
 from utils.coordinate_transform import CoordinateTransform
+
+
+def get_default_tienkung_urdf(script_dir: str) -> str:
+    repo_root = os.path.dirname(script_dir)
+    return os.path.join(repo_root, "assets", "Tienkung", "urdf", "walker_tienkung_ei_local.urdf")
 
 # Try to import yourdfpy for joint names extraction
 try:
@@ -248,7 +259,8 @@ def visualize_comparison(bvh_path: str,
                         end_frame: int = -1,
                         loop: bool = True,
                         bvh_follow_robot_yaw: bool = False,
-                        fix_orientation: bool = False):
+                        fix_orientation: bool = False,
+                        bvh_yaw_offset: float = 0.0):
     """
     Visualize BVH skeleton and robot side-by-side.
     """
@@ -261,6 +273,11 @@ def visualize_comparison(bvh_path: str,
     bvh_loader = BVHLoader(bvh_path)
     pkl_data = load_pkl_data(pkl_path)
     coord_trans = CoordinateTransform()
+    
+    # Calculate yaw offset in radians
+    # This converts the offset from degrees (human readable) to radians (for math)
+    # Example: 90 degrees -> 1.57 radians
+    yaw_offset_rad = np.radians(bvh_yaw_offset)
     
     n_frames_bvh = bvh_loader.frames
     n_frames_pkl = pkl_data['root_pos'].shape[0]
@@ -281,10 +298,20 @@ def visualize_comparison(bvh_path: str,
     
     # Configure GUI
     p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
-    p.configureDebugVisualizer(p.COV_ENABLE_SHADOWS, 1)
+    
+    # Enable shadows for better depth perception (and use bright materials to avoid darkness)
+    p.configureDebugVisualizer(p.COV_ENABLE_SHADOWS, 0)
+    
+    # Use a clean white background? No, PyBullet doesn't support changing background color easily.
+    # But we can load a better ground plane or grid.
     
     # Load ground plane
+    # plane_id = p.loadURDF("plane.urdf")
+    
+    # Load a grid floor instead of the infinite checkerboard if desired?
+    # For now, let's stick to plane.urdf but maybe change its color?
     plane_id = p.loadURDF("plane.urdf")
+    p.changeVisualShape(plane_id, -1, rgbaColor=[0.82, 0.84, 0.88, 1])
     
     # Compute initial BVH hip position in robot frame
     bvh_fk_frame0 = compute_bvh_fk(bvh_loader, start_frame)
@@ -292,28 +319,29 @@ def visualize_comparison(bvh_path: str,
     initial_bvh_pos = coord_trans.transform_position(bvh_hip_pos_frame0.reshape(1,3))[0]
     
     # Position offsets to place models side by side
-    # BVH skeleton on the left (Y = -2), Robot on the right (Y = +2)
-    bvh_offset = np.array([0, -2.0, 0]) - np.array([initial_bvh_pos[0], initial_bvh_pos[1], 0])
-    robot_offset = np.array([0, 2.0, 0])
+    # Reduce the gap between them (was 2.0, now 1.0)
+    bvh_offset = np.array([0, -1.0, 0]) - np.array([initial_bvh_pos[0], initial_bvh_pos[1], 0])
+    robot_offset = np.array([0, 1.0, 0])
     
-    # Extract only yaw rotation from PKL root_rot
-    def extract_yaw_quaternion(quat_xyzw):
-        """Extract only yaw (Z-axis) rotation from a quaternion."""
+    def get_robot_visualization_quaternion(quat_xyzw):
+        """Use full root orientation so torso lean remains visible."""
         if fix_orientation:
             return np.array([0.0, 0.0, 0.0, 1.0])
-        r = R.from_quat(quat_xyzw)
-        euler = r.as_euler('zyx', degrees=False)  # Get euler angles
-        yaw = euler[0]  # Z rotation (yaw)
-        r_yaw = R.from_euler('z', yaw)
-        return r_yaw.as_quat()  # Returns xyzw
+        return quat_xyzw
     
     # Load robot with upright orientation
     print(f"Loading robot URDF: {urdf_path}")
     init_z = 1.0 # Default height
     init_pos = [robot_offset[0], robot_offset[1], init_z]
-    init_orn = extract_yaw_quaternion(pkl_data['root_rot'][start_frame])
+    init_orn = get_robot_visualization_quaternion(pkl_data['root_rot'][start_frame])
     
     robot_id = p.loadURDF(urdf_path, init_pos, init_orn.tolist(), useFixedBase=False)
+    
+    # Use a darker robot color so the full body remains visible against the floor
+    for j in range(-1, p.getNumJoints(robot_id)):
+        p.changeVisualShape(robot_id, j, rgbaColor=[0.62, 0.68, 0.78, 1])
+
+    print(f"Robot visual meshes loaded: {len(p.getVisualShapeData(robot_id))}")
     
     # Get joint indices and names from URDF
     num_joints = p.getNumJoints(robot_id)
@@ -335,7 +363,10 @@ def visualize_comparison(bvh_path: str,
     # Otherwise, we assume PKL follows the URDF order found by PyBullet (risky but often true)
 
     config_joint_order = []
-    if yourdfpy:
+    if 'dof_names' in pkl_data:
+        config_joint_order = pkl_data['dof_names']
+        print(f"Using joint names from PKL: {len(config_joint_order)} joints")
+    elif yourdfpy:
         print("Using yourdfpy to determine joint order...")
         urdf_model = yourdfpy.URDF.load(urdf_path)
         # IMPORTANT: Must match PyRoki's logic - only actuated, non-mimic joints
@@ -370,15 +401,18 @@ def visualize_comparison(bvh_path: str,
         r_init = R.from_quat(pkl_data['root_rot'][start_frame])
         init_yaw = r_init.as_euler('zyx', degrees=False)[0]
     
+    # Apply manual offset
+    init_yaw += yaw_offset_rad
+    
     # Create BVH skeleton visualizer
     bvh_viz = BVHSkeletonVisualizer(p, offset=bvh_offset, yaw_rotation=init_yaw)
     
     # Add text labels
-    p.addUserDebugText("BVH Skeleton", [0, -2.0, 2.2], textColorRGB=[1, 1, 1], textSize=1.5, lifeTime=0)
-    p.addUserDebugText("Retargeted Robot", [0, 2.0, 2.2], textColorRGB=[1, 1, 1], textSize=1.5, lifeTime=0)
+    p.addUserDebugText("BVH Skeleton", [0, -1.0, 2.2], textColorRGB=[1, 1, 1], textSize=1.5, lifeTime=0)
+    p.addUserDebugText("Retargeted Robot", [0, 1.0, 2.2], textColorRGB=[1, 1, 1], textSize=1.5, lifeTime=0)
     
-    # Set camera
-    p.resetDebugVisualizerCamera(cameraDistance=6.0, cameraYaw=90, cameraPitch=-15, cameraTargetPosition=[0, 0, 1.0])
+    # Use an oblique camera so torso and arms are not edge-on.
+    p.resetDebugVisualizerCamera(cameraDistance=2.8, cameraYaw=55, cameraPitch=-18, cameraTargetPosition=[0, 0, 1.15])
     
     # Animation loop
     fps = pkl_data['fps']
@@ -408,12 +442,17 @@ def visualize_comparison(bvh_path: str,
             for name, pos in bvh_joint_positions.items():
                 bvh_fixed_positions[name] = pos - hip_delta
             
-            if bvh_follow_robot_yaw:
-                r_current = R.from_quat(pkl_data['root_rot'][frame_idx])
-                current_yaw = r_current.as_euler('zyx', degrees=False)[0]
-                bvh_viz.yaw_rotation = current_yaw
-                c, s = np.cos(current_yaw), np.sin(current_yaw)
-                bvh_viz.yaw_matrix = np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
+            # Remove dynamic yaw update to prevent double rotation
+            # if bvh_follow_robot_yaw:
+            #     r_current = R.from_quat(pkl_data['root_rot'][frame_idx])
+            #     current_yaw = r_current.as_euler('zyx', degrees=False)[0]
+            #     
+            #     # Apply manual offset
+            #     current_yaw += yaw_offset_rad
+            #     
+            #     bvh_viz.yaw_rotation = current_yaw
+            #     c, s = np.cos(current_yaw), np.sin(current_yaw)
+            #     bvh_viz.yaw_matrix = np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
             
             if p.isConnected():
                 bvh_viz.draw_frame(bvh_fixed_positions)
@@ -422,7 +461,7 @@ def visualize_comparison(bvh_path: str,
             
             # Robot
             robot_dof = pkl_data['dof_pos'][frame_idx]
-            robot_orn = extract_yaw_quaternion(pkl_data['root_rot'][frame_idx])
+            robot_orn = get_robot_visualization_quaternion(pkl_data['root_rot'][frame_idx])
             robot_z = pkl_data['root_pos'][frame_idx][2]
             
             # Use raw Z from PKL? Or relative?
@@ -473,7 +512,13 @@ def main():
     # Defaults
     default_bvh = os.path.join(script_dir, "data", "raw_data", "lafan1", "walk1_subject1.bvh")
     default_pkl = os.path.join(script_dir, "output.pkl")
-    default_urdf = os.path.join(script_dir, "assets", "urdf", "humanoid_simple.urdf")
+    default_urdf = get_default_tienkung_urdf(script_dir)
+    
+    # -------------------------------------------------------------------------
+    # BVH Orientation Offset (in degrees)
+    # Modify this value to fix orientation mismatch (e.g., 90, -90, 180)
+    DEFAULT_BVH_YAW_OFFSET = 90.0  
+    # -------------------------------------------------------------------------
 
     parser = argparse.ArgumentParser(description="Side-by-side visualization")
     parser.add_argument("--bvh", type=str, default=default_bvh, help="Path to BVH file")
@@ -485,6 +530,7 @@ def main():
     parser.add_argument("--no-loop", action="store_true")
     parser.add_argument("--bvh-follow-robot-yaw", action="store_true")
     parser.add_argument("--fix-orientation", action="store_true")
+    parser.add_argument("--bvh-yaw-offset", type=float, default=DEFAULT_BVH_YAW_OFFSET, help="Manual yaw offset for BVH skeleton in degrees")
     
     args = parser.parse_args()
     
@@ -497,7 +543,8 @@ def main():
         end_frame=args.end,
         loop=not args.no_loop,
         bvh_follow_robot_yaw=args.bvh_follow_robot_yaw,
-        fix_orientation=args.fix_orientation
+        fix_orientation=args.fix_orientation,
+        bvh_yaw_offset=args.bvh_yaw_offset
     )
 
 if __name__ == "__main__":

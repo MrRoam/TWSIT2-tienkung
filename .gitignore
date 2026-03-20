@@ -93,8 +93,7 @@ log.txt
 data/
 
 assets/*
-!assets/Tienkung/
-!assets/Tienkung/**
+
 
 # Model checkpoints and temporary files (additional)
 *.tgz
@@ -142,3 +141,4 @@ assets/*
 *.pptx
 *.doc
 *.doc
+*ppt.py

@@ -38,6 +38,7 @@ class TWIST2Exporter:
                root_rot: np.ndarray, 
                dof_pos: np.ndarray,
                local_body_pos: Optional[np.ndarray] = None,
+               dof_names: Optional[List[str]] = None,
                fps: float = 30.0,
                output_path: str = "output.pkl") -> Dict:
         """
@@ -45,9 +46,10 @@ class TWIST2Exporter:
         
         Args:
             root_pos: Root position array [N, 3] in meters (Z-up)
-            root_rot: Root rotation quaternion array [N, 4] (x, y, z, w)
+            root_rot: Root rotation quaternion array [N, 4] in xyzw order
             dof_pos: Joint angles array [N, DOF] in radians
             local_body_pos: Local body positions [N, M, 3] (optional)
+            dof_names: Optional joint names aligned with dof_pos columns
             fps: Frame rate
             output_path: Output file path
         """
@@ -62,7 +64,7 @@ class TWIST2Exporter:
         # Normalize quaternions
         root_rot = normalize_quaternion(root_rot)
         
-         # Use provided local_body_pos or create placeholder
+        # Use provided local_body_pos or create placeholder
         if local_body_pos is None:
             # Create placeholder
             num_bodies = len(self.key_bodies)
@@ -78,6 +80,9 @@ class TWIST2Exporter:
             "local_body_pos": local_body_pos.astype(np.float64),
             "link_body_list": self.key_bodies
         }
+
+        if dof_names is not None:
+            pkl_data["dof_names"] = list(dof_names)
         
         # Save to file
         os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else '.', exist_ok=True)

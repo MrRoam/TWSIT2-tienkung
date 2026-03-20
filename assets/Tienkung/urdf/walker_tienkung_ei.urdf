@@ -36,7 +36,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/pelvis.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/pelvis.STL" />
       </geometry>
       <material
         name="">
@@ -50,7 +50,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/pelvis.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/pelvis.STL" />
       </geometry>
     </collision>
   </link>
@@ -77,7 +77,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -91,7 +91,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_roll_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -133,7 +133,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -147,7 +147,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -189,7 +189,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_yaw_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -203,7 +203,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_yaw_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -245,7 +245,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/knee_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -259,7 +259,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/knee_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -301,7 +301,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -315,7 +315,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -357,7 +357,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -371,7 +371,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -413,7 +413,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -427,7 +427,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_roll_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -467,7 +467,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -481,7 +481,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -521,7 +521,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_yaw_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -535,7 +535,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/hip_yaw_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -576,7 +576,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/knee_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -590,7 +590,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/knee_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -632,7 +632,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -646,7 +646,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -688,7 +688,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -702,7 +702,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/ankle_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -744,7 +744,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/waist_yaw_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/waist_yaw_link.STL" />
       </geometry>
       <material
         name="">
@@ -758,7 +758,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/waist_yaw_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/waist_yaw_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -800,7 +800,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/head_yaw_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/head_yaw_link.STL" />
       </geometry>
       <material
         name="">
@@ -814,7 +814,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/head_yaw_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/head_yaw_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -856,7 +856,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/head_pitch_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/head_pitch_link.STL" />
       </geometry>
       <material
         name="">
@@ -870,7 +870,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/head_pitch_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/head_pitch_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -912,7 +912,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/head_roll_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/head_roll_link.STL" />
       </geometry>
       <material
         name="">
@@ -926,7 +926,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/head_roll_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/head_roll_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -968,7 +968,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/camera_head_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/camera_head_link.STL" />
       </geometry>
       <material
         name="">
@@ -982,7 +982,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/camera_head_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/camera_head_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1023,7 +1023,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1037,7 +1037,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1079,7 +1079,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1093,7 +1093,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1135,7 +1135,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_yaw_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1149,7 +1149,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_yaw_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1191,7 +1191,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1205,7 +1205,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1248,7 +1248,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_yaw_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1262,7 +1262,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_yaw_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1304,7 +1304,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1318,7 +1318,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_pitch_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1360,7 +1360,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1374,7 +1374,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_roll_l_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_l_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1416,7 +1416,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1430,7 +1430,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1472,7 +1472,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1486,7 +1486,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1526,7 +1526,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_yaw_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1540,7 +1540,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/shoulder_yaw_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1580,7 +1580,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1594,7 +1594,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1634,7 +1634,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_yaw_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1648,7 +1648,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/elbow_yaw_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1688,7 +1688,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1702,7 +1702,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_pitch_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1742,7 +1742,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1756,7 +1756,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/wrist_roll_r_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_r_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1798,7 +1798,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/camera_body_front_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/camera_body_front_link.STL" />
       </geometry>
       <material
         name="">
@@ -1812,7 +1812,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/camera_body_front_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/camera_body_front_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1851,7 +1851,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/camera_body_back_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/camera_body_back_link.STL" />
       </geometry>
       <material
         name="">
@@ -1865,7 +1865,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://tiangong_description/meshes/camera_body_back_link.STL" />
+          filename="package://walker_tienkung_ei_description/meshes/camera_body_back_link.STL" />
       </geometry>
     </collision>
   </link>

@@ -92,7 +92,9 @@ log.txt
 # Data directories
 data/
 
-assets
+assets/*
+!assets/Tienkung/
+!assets/Tienkung/**
 
 # Model checkpoints and temporary files (additional)
 *.tgz
@@ -136,3 +138,7 @@ assets/*
 # but keep Tienkung
 !assets/Tienkung/
 !assets/Tienkung/**
+
+*.pptx
+*.doc
+*.doc

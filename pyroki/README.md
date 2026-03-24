@@ -104,9 +104,9 @@ python run_simple.py fight1_subject2.bvh
 ## Configuration
 
 ### URDF
-- **Recommended**: `humanoid_simple.urdf` (uses simplified meshes)
-- **Alternative**: `humanoid.urdf` (original full meshes)
-- **Location**: `assets/urdf/`
+- **Tienkung**: `../assets/Tienkung/urdf/walker_tienkung_ei.urdf`
+- **Legacy demo URDFs**: `assets/urdf/humanoid_simple.urdf`, `assets/urdf/humanoid.urdf`
+- **Note**: The current Tienkung pipeline uses the repository-level URDF, not `pyroki/assets/urdf/`
 
 ### Key Fix Applied
 - **Issue**: `humanoid_simple.urdf` had incorrect pitch value for `right_joint7`
@@ -128,9 +128,9 @@ python run_simple.py fight1_subject2.bvh
 
 ### Robot Model
 - Robot: Tiangong (天宫) humanoid
-- DOF: 38 (actuated, non-mimic joints)
-- Total joints: 55 (including fixed and mimic)
-- Mimic joints: 12 (finger intermediate/distal joints)
+- Current Tienkung URDF DOF: 30 actuated joints
+- Current PKL key bodies: 26
+- The old 38-DOF / mimic-finger notes only apply to the legacy demo URDFs in `pyroki/assets/urdf/`
 
 ## Troubleshooting
 

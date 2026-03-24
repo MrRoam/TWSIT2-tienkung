@@ -8,9 +8,9 @@ class TienkungMimicCfg(HumanoidMimicCfg):
                          50, 55, 60, 65, 70, 75, 80, 85, 90, 95,]
         
         num_envs = 2048
-        num_actions = 38
+        num_actions = 30
         n_priv = 0
-        n_mimic_obs = 9 + 38
+        n_mimic_obs = 9 + num_actions
         n_priv_mimic_obs = len(tar_motion_steps_priv) * n_mimic_obs
         n_proprio = len(tar_motion_steps_priv) * n_mimic_obs + 3 + 2 + 3*num_actions
         n_priv_latent = 4 + 1 + 2*num_actions
@@ -39,17 +39,11 @@ class TienkungMimicCfg(HumanoidMimicCfg):
         rand_reset = True
         track_root = False
         dof_err_w = [
-            # 腿部 (12)
-            1.0, 1.0, 1.0, 1.0, 1.0, 1.0,  # 左腿
-            1.0, 1.0, 1.0, 1.0, 1.0, 1.0,  # 右腿
-            
-            # 手臂 (14)
-            1.0, 1.0, 1.0, 1.0, 0.5, 0.5, 0.5,  # 左臂
-            1.0, 1.0, 1.0, 1.0, 0.5, 0.5, 0.5,  # 右臂
-            
-            # 手部 (12)
-            0.1, 0.1, 0.1, 0.1, 0.1, 0.1,  # 左手
-            0.1, 0.1, 0.1, 0.1, 0.1, 0.1,  # 右手
+            1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+            1.0, 0.7, 0.7, 0.5,
+            1.0, 1.0, 1.0, 1.0, 1.0, 0.6, 0.6,
+            1.0, 1.0, 1.0, 1.0, 1.0, 0.6, 0.6,
         ]
         
         global_obs = False
@@ -62,7 +56,6 @@ class TienkungMimicCfg(HumanoidMimicCfg):
     class init_state(HumanoidMimicCfg.init_state):
         pos = [0, 0, 0.80]
         default_joint_angles = {
-            # ========== 腿部 (12 DOF) ==========
             'hip_roll_l_joint': 0.0,
             'hip_yaw_l_joint': 0.0,
             'hip_pitch_l_joint': -0.2,
@@ -75,38 +68,24 @@ class TienkungMimicCfg(HumanoidMimicCfg):
             'knee_pitch_r_joint': 0.4,
             'ankle_pitch_r_joint': -0.2,
             'ankle_roll_r_joint': 0.0,
-
-            # ========== 手臂 (14 DOF) ==========
-            'left_joint1': 0.0,
+            'waist_yaw_joint': 0.0,
+            'head_yaw_joint': 0.0,
+            'head_pitch_joint': 0.0,
+            'head_roll_joint': 0.0,
+            'shoulder_pitch_l_joint': 0.0,
             'shoulder_roll_l_joint': 0.0,
-            'left_joint3': 0.0,
-            'elbow_l_joint': 0.0,
-            'left_joint5': 0.0,
-            'left_joint6': 0.0,
-            'left_joint7': 0.0,
-            'right_joint1': 0.0,
+            'shoulder_yaw_l_joint': 0.0,
+            'elbow_pitch_l_joint': 0.0,
+            'elbow_yaw_l_joint': 0.0,
+            'wrist_pitch_l_joint': 0.0,
+            'wrist_roll_l_joint': 0.0,
+            'shoulder_pitch_r_joint': 0.0,
             'shoulder_roll_r_joint': 0.0,
-            'right_joint3': 0.0,
-            'elbow_r_joint': 0.0,
-            'right_joint5': 0.0,
-            'right_joint6': 0.0,
-            'right_joint7': 0.0,
-            
-            # ========== 手部 (12 DOF) ==========
-            # 左手
-            'L_thumb_proximal_yaw_joint': 0.0,
-            'L_thumb_proximal_pitch_joint': 0.25,
-            'L_index_proximal_joint': 0.0,
-            'L_middle_proximal_joint': 0.0,
-            'L_ring_proximal_joint': 0.0,
-            'L_pinky_proximal_joint': 0.0,
-            # 右手
-            'R_thumb_proximal_yaw_joint': 0.0,
-            'R_thumb_proximal_pitch_joint': 0.25,
-            'R_index_proximal_joint': 0.0,
-            'R_middle_proximal_joint': 0.0,
-            'R_ring_proximal_joint': 0.0,
-            'R_pinky_proximal_joint': 0.0,
+            'shoulder_yaw_r_joint': 0.0,
+            'elbow_pitch_r_joint': 0.0,
+            'elbow_yaw_r_joint': 0.0,
+            'wrist_pitch_r_joint': 0.0,
+            'wrist_roll_r_joint': 0.0,
         }
     
     class control(HumanoidMimicCfg.control):
@@ -152,18 +131,18 @@ class TienkungMimicCfg(HumanoidMimicCfg):
         clip_actions = 5.0
     
     class asset(HumanoidMimicCfg.asset):
-        file = '{LEGGED_GYM_ROOT_DIR}/../assets/Tienkung/urdf/humanoid_simple.urdf'
+        file = '{LEGGED_GYM_ROOT_DIR}/../assets/Tienkung/urdf/walker_tienkung_ei.urdf'
         
         torso_name: str = 'pelvis'
-        chest_name: str = 'waist_link'
+        chest_name: str = 'waist_yaw_link'
         
-        thigh_name: str = 'hip_pitch_l_link'
-        shank_name: str = 'knee_pitch_l_link'
-        foot_name: str = 'ankle_roll_l_link'
-        waist_name: list = ['waist_link']
-        upper_arm_name: str = 'shoulder_roll_l_link'
-        lower_arm_name: str = 'elbow_l_link'
-        hand_name: str = 'L_hand_base_link'
+        thigh_name: str = 'hip_pitch'
+        shank_name: str = 'knee_pitch'
+        foot_name: str = 'ankle_roll'
+        waist_name: list = ['waist_yaw_link']
+        upper_arm_name: str = 'shoulder_roll'
+        lower_arm_name: str = 'elbow_pitch'
+        hand_name: list = ['wrist_roll_l_link', 'wrist_roll_r_link']
         
         feet_bodies = ['ankle_roll_l_link', 'ankle_roll_r_link']
         n_lower_body_dofs: int = 12
@@ -171,7 +150,7 @@ class TienkungMimicCfg(HumanoidMimicCfg):
         penalize_contacts_on = ["shoulder", "elbow", "hip", "knee"]
         terminate_after_contacts_on = ['pelvis']
         
-        dof_armature = [0.0103, 0.0103, 0.0251, 0.0251, 0.003597, 0.003597, 0.0103, 0.0103, 0.0251, 0.0251, 0.003597, 0.003597, 0.0103, 0.003597, 0.003597, 0.0251, 0.003597, 0.003597, 0.003597, 0.0103, 0.003597, 0.003597, 0.0251, 0.003597, 0.003597, 0.003597, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+        dof_armature = [0.0103, 0.0103, 0.0251, 0.0251, 0.003597, 0.003597] * 2 + [0.0103] * 4 + [0.003597] * 14
 
         collapse_fixed_joints = False
         self_collisions = 1 # 1 to disable, 0 to enable...bitwise filter
@@ -291,15 +270,15 @@ class TienkungMimicCfg(HumanoidMimicCfg):
     class motion(HumanoidMimicCfg.motion):
         motion_curriculum = True
         motion_curriculum_gamma = 0.01
-        key_bodies = ["pelvis", "waist_link", 
-                      "hip_roll_l_link", "hip_yaw_l_link", "hip_pitch_l_link", 
+        key_bodies = ["pelvis", "waist_yaw_link",
+                      "hip_roll_l_link", "hip_pitch_l_link", "hip_yaw_l_link",
                       "knee_pitch_l_link", "ankle_pitch_l_link", "ankle_roll_l_link",
-                      "hip_roll_r_link", "hip_yaw_r_link", "hip_pitch_r_link", 
+                      "hip_roll_r_link", "hip_pitch_r_link", "hip_yaw_r_link",
                       "knee_pitch_r_link", "ankle_pitch_r_link", "ankle_roll_r_link",
-                      "left_link0", "shoulder_roll_l_link", "left_link2", 
-                      "elbow_l_link", "left_link4", "L_hand_base_link",
-                      "right_link0", "shoulder_roll_r_link", "right_link2", 
-                      "elbow_r_link", "right_link4", "R_hand_base_link"]
+                      "shoulder_pitch_l_link", "shoulder_roll_l_link", "shoulder_yaw_l_link",
+                      "elbow_pitch_l_link", "elbow_yaw_l_link", "wrist_roll_l_link",
+                      "shoulder_pitch_r_link", "shoulder_roll_r_link", "shoulder_yaw_r_link",
+                      "elbow_pitch_r_link", "elbow_yaw_r_link", "wrist_roll_r_link"]
         upper_key_bodies = []
         
         motion_file = f"{LEGGED_GYM_ROOT_DIR}/motion_data_configs/lafan1_tienkung_train.yaml"
@@ -328,7 +307,7 @@ class TienkungMimicCfgPPO(HumanoidMimicCfgPPO):
         entropy_coef = 0.005
         
     class policy(HumanoidMimicCfgPPO.policy):
-        action_std = [0.7] * 12 + [0.4] * 3 + [0.5] * 23
+        action_std = [0.7] * 12 + [0.4] * 4 + [0.5] * 14
         init_noise_std = 0.8
         # obs_context_len = 11  # Not used in ActorCriticMimic
         actor_hidden_dims = [512, 512, 256, 128]

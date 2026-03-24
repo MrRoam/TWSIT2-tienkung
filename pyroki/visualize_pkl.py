@@ -7,8 +7,8 @@ No BVH file required.
 
 Usage:
     python pyroki/visualize_pkl.py \
-        --pkl pyroki/outputs/aiming1_subject1.pkl \
-        --urdf assets/Tienkung/urdf/humanoid_simple.urdf
+        --pkl pyroki/outputs_test/test_2.pkl \
+        --urdf assets/Tienkung/urdf/walker_tienkung_ei.urdf
 """
 
 import sys

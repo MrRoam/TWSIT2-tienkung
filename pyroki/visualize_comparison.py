@@ -7,14 +7,14 @@ to visually compare the retargeting quality.
 Usage:
     python pyroki/visualize_comparison.py \
         --bvh pyroki/data/raw_data/lafan1/walk1_subject1.bvh \
-        --pkl pyroki/outputs/walk1_subject1.pkl \
-        --urdf pyroki/assets/urdf/humanoid_simple.urdf
+        --pkl pyroki/outputs_test/test_2.pkl \
+        --urdf assets/Tienkung/urdf/walker_tienkung_ei.urdf
 
     # Windows absolute path example:
     python pyroki/visualize_comparison.py \
         --bvh D:/Desktop/TWIST2/pyroki/data/raw_data/lafan1/walk1_subject1.bvh \
-        --pkl D:/Desktop/TWIST2/pyroki/outputs/walk1_subject1.pkl \
-        --urdf D:/Desktop/TWIST2/pyroki/assets/urdf/humanoid_simple.urdf
+        --pkl D:/Desktop/TWIST2/pyroki/outputs_test/test_2.pkl \
+        --urdf D:/Desktop/TWIST2/assets/Tienkung/urdf/walker_tienkung_ei.urdf
 """
 
 import sys
@@ -39,7 +39,7 @@ from utils.coordinate_transform import CoordinateTransform
 
 def get_default_tienkung_urdf(script_dir: str) -> str:
     repo_root = os.path.dirname(script_dir)
-    return os.path.join(repo_root, "assets", "Tienkung", "urdf", "walker_tienkung_ei_local.urdf")
+    return os.path.join(repo_root, "assets", "Tienkung", "urdf", "walker_tienkung_ei.urdf")
 
 # Try to import yourdfpy for joint names extraction
 try:
@@ -251,6 +251,104 @@ class BVHSkeletonVisualizer:
         self.bone_lines.clear()
 
 
+class RobotLinkVisualizer:
+    """Draw the robot link skeleton with debug lines, independent of STL rendering."""
+
+    def __init__(self, pybullet_client, robot_id: int):
+        self.p = pybullet_client
+        self.robot_id = robot_id
+        self.cross_ids = []
+        self.bone_ids = []
+        self.parent_map = {}
+        self.link_names = {-1: "pelvis"}
+
+        for i in range(self.p.getNumJoints(robot_id)):
+            joint_info = self.p.getJointInfo(robot_id, i)
+            self.parent_map[i] = joint_info[16]
+            self.link_names[i] = joint_info[12].decode("utf-8")
+
+    def _get_link_world_position(self, link_index: int):
+        if link_index == -1:
+            pos, _ = self.p.getBasePositionAndOrientation(self.robot_id)
+            return np.array(pos)
+        state = self.p.getLinkState(self.robot_id, link_index, computeForwardKinematics=True)
+        return np.array(state[4])
+
+    def _get_link_color(self, link_name: str):
+        if "_l_" in link_name:
+            return [1, 0.2, 0.2]
+        if "_r_" in link_name:
+            return [0.2, 1, 0.2]
+        return [0.2, 0.8, 1]
+
+    def draw(self):
+        if not self.p.isConnected():
+            return
+
+        cross_idx = 0
+        bone_idx = 0
+        cross_size = 0.035
+
+        for link_index in range(-1, self.p.getNumJoints(self.robot_id)):
+            link_name = self.link_names[link_index]
+            pos = self._get_link_world_position(link_index)
+            color = self._get_link_color(link_name)
+
+            cross_lines = [
+                ([pos[0] - cross_size, pos[1], pos[2]], [pos[0] + cross_size, pos[1], pos[2]]),
+                ([pos[0], pos[1] - cross_size, pos[2]], [pos[0], pos[1] + cross_size, pos[2]]),
+                ([pos[0], pos[1], pos[2] - cross_size], [pos[0], pos[1], pos[2] + cross_size]),
+            ]
+            for start, end in cross_lines:
+                if cross_idx < len(self.cross_ids):
+                    self.cross_ids[cross_idx] = self.p.addUserDebugLine(
+                        start,
+                        end,
+                        lineColorRGB=color,
+                        lineWidth=2,
+                        lifeTime=0,
+                        replaceItemUniqueId=self.cross_ids[cross_idx],
+                    )
+                else:
+                    self.cross_ids.append(
+                        self.p.addUserDebugLine(start, end, lineColorRGB=color, lineWidth=2, lifeTime=0)
+                    )
+                cross_idx += 1
+
+            if link_index != -1:
+                parent_index = self.parent_map[link_index]
+                parent_pos = self._get_link_world_position(parent_index)
+                if bone_idx < len(self.bone_ids):
+                    self.bone_ids[bone_idx] = self.p.addUserDebugLine(
+                        parent_pos.tolist(),
+                        pos.tolist(),
+                        lineColorRGB=[1, 0.7, 0.1],
+                        lineWidth=1.5,
+                        lifeTime=0,
+                        replaceItemUniqueId=self.bone_ids[bone_idx],
+                    )
+                else:
+                    self.bone_ids.append(
+                        self.p.addUserDebugLine(
+                            parent_pos.tolist(),
+                            pos.tolist(),
+                            lineColorRGB=[1, 0.7, 0.1],
+                            lineWidth=1.5,
+                            lifeTime=0,
+                        )
+                    )
+                bone_idx += 1
+
+    def clear(self):
+        for item_id in self.cross_ids + self.bone_ids:
+            try:
+                self.p.removeUserDebugItem(item_id)
+            except Exception:
+                pass
+        self.cross_ids.clear()
+        self.bone_ids.clear()
+
+
 def visualize_comparison(bvh_path: str, 
                         pkl_path: str, 
                         urdf_path: str,
@@ -260,7 +358,8 @@ def visualize_comparison(bvh_path: str,
                         loop: bool = True,
                         bvh_follow_robot_yaw: bool = False,
                         fix_orientation: bool = False,
-                        bvh_yaw_offset: float = 0.0):
+                        bvh_yaw_offset: float = 0.0,
+                        show_robot_links: bool = False):
     """
     Visualize BVH skeleton and robot side-by-side.
     """
@@ -290,6 +389,9 @@ def visualize_comparison(bvh_path: str,
     print(f"PKL: {n_frames_pkl} frames @ {pkl_data['fps']:.1f} FPS")
     print(f"Playing frames {start_frame} to {end_frame}")
     print()
+
+    if not os.path.isfile(urdf_path):
+        raise FileNotFoundError(f"URDF file not found: {urdf_path}")
     
     # Connect to PyBullet
     physics_client = p.connect(p.GUI)
@@ -342,6 +444,8 @@ def visualize_comparison(bvh_path: str,
         p.changeVisualShape(robot_id, j, rgbaColor=[0.62, 0.68, 0.78, 1])
 
     print(f"Robot visual meshes loaded: {len(p.getVisualShapeData(robot_id))}")
+    if show_robot_links:
+        print("Robot link debug markers enabled.")
     
     # Get joint indices and names from URDF
     num_joints = p.getNumJoints(robot_id)
@@ -406,6 +510,7 @@ def visualize_comparison(bvh_path: str,
     
     # Create BVH skeleton visualizer
     bvh_viz = BVHSkeletonVisualizer(p, offset=bvh_offset, yaw_rotation=init_yaw)
+    robot_link_viz = RobotLinkVisualizer(p, robot_id) if show_robot_links else None
     
     # Add text labels
     p.addUserDebugText("BVH Skeleton", [0, -1.0, 2.2], textColorRGB=[1, 1, 1], textSize=1.5, lifeTime=0)
@@ -475,6 +580,9 @@ def visualize_comparison(bvh_path: str,
                 for cfg_idx, urdf_idx in config_to_urdf_map.items():
                     if cfg_idx < len(robot_dof):
                         p.resetJointState(robot_id, urdf_idx, robot_dof[cfg_idx])
+
+                if robot_link_viz is not None:
+                    robot_link_viz.draw()
                 
                 p.stepSimulation()
             else:
@@ -502,6 +610,8 @@ def visualize_comparison(bvh_path: str,
         print("\nStopped by user")
     finally:
         bvh_viz.clear()
+        if robot_link_viz is not None:
+            robot_link_viz.clear()
         if p.isConnected():
             p.disconnect()
 
@@ -531,6 +641,7 @@ def main():
     parser.add_argument("--bvh-follow-robot-yaw", action="store_true")
     parser.add_argument("--fix-orientation", action="store_true")
     parser.add_argument("--bvh-yaw-offset", type=float, default=DEFAULT_BVH_YAW_OFFSET, help="Manual yaw offset for BVH skeleton in degrees")
+    parser.add_argument("--show-robot-links", action="store_true", help="Draw robot link markers and parent-child bones, independent of STL visibility")
     
     args = parser.parse_args()
     
@@ -544,7 +655,8 @@ def main():
         loop=not args.no_loop,
         bvh_follow_robot_yaw=args.bvh_follow_robot_yaw,
         fix_orientation=args.fix_orientation,
-        bvh_yaw_offset=args.bvh_yaw_offset
+        bvh_yaw_offset=args.bvh_yaw_offset,
+        show_robot_links=args.show_robot_links,
     )
 
 if __name__ == "__main__":

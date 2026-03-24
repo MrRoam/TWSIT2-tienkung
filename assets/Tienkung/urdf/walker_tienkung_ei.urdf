@@ -36,7 +36,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/pelvis.STL" />
+          filename="../meshes/pelvis.STL" />
       </geometry>
       <material
         name="">
@@ -44,13 +44,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000126 -0.000761 -0.005836"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/pelvis.STL" />
+        <box
+          size="0.219663 0.172732 0.159129" />
       </geometry>
     </collision>
   </link>
@@ -77,7 +77,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_roll_l_link.STL" />
+          filename="../meshes/hip_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -85,13 +85,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="-0.001948 0.029494 -0.030633"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_roll_l_link.STL" />
+        <box
+          size="0.176494 0.110621 0.112739" />
       </geometry>
     </collision>
   </link>
@@ -133,7 +133,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_l_link.STL" />
+          filename="../meshes/hip_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -141,13 +141,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.003928 0.001252 -0.010600"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_l_link.STL" />
+        <box
+          size="0.155999 0.107960 0.164880" />
       </geometry>
     </collision>
   </link>
@@ -156,10 +156,10 @@
     name="hip_pitch_l_joint"
     type="revolute">
     <origin
-      xyz="0 0.122 -0.046"
+      xyz="0 0.094 0.0987"
       rpy="0 0 0" />
     <parent
-      link="hip_roll_l_link" />
+      link="hip_yaw_l_link" />
     <child
       link="hip_pitch_l_link" />
     <axis
@@ -189,7 +189,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_l_link.STL" />
+          filename="../meshes/hip_yaw_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -197,13 +197,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.006090 0.009382 -0.168814"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_l_link.STL" />
+        <box
+          size="0.155887 0.141082 0.309206" />
       </geometry>
     </collision>
   </link>
@@ -212,15 +212,15 @@
     name="hip_yaw_l_joint"
     type="revolute">
     <origin
-      xyz="0 0 -0.0987"
+      xyz="0 0.028 -0.1317"
       rpy="0 0 0" />
     <parent
-      link="hip_pitch_l_link" />
+      link="hip_roll_l_link" />
     <child
       link="hip_yaw_l_link" />
     <axis
       xyz="0 0 1" />
-    <limit effort="160" lower="-1.04" upper="1.04" velocity="15.6"/>  
+    <limit effort="160" lower="-1.04" upper="1.04" velocity="15.6"/>
   </joint>
 
   <link
@@ -245,7 +245,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_l_link.STL" />
+          filename="../meshes/knee_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -253,13 +253,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.005643 0.000134 -0.182957"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_l_link.STL" />
+        <box
+          size="0.084733 0.083538 0.424877" />
       </geometry>
     </collision>
   </link>
@@ -268,10 +268,10 @@
     name="knee_pitch_l_joint"
     type="revolute">
     <origin
-      xyz="0 -4.2833E-05 -0.3013"
+      xyz="0 0 -0.413"
       rpy="0 0 0" />
     <parent
-      link="hip_yaw_l_link" />
+      link="hip_pitch_l_link" />
     <child
       link="knee_pitch_l_link" />
     <axis
@@ -301,7 +301,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_l_link.STL" />
+          filename="../meshes/ankle_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -309,13 +309,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000000 0.000000 0.000000"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_l_link.STL" />
+        <box
+          size="0.059400 0.059400 0.021600" />
       </geometry>
     </collision>
   </link>
@@ -357,7 +357,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_l_link.STL" />
+          filename="../meshes/ankle_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -365,13 +365,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.039545 -0.000004 -0.012256"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_l_link.STL" />
+        <box
+          size="0.253435 0.105883 0.085941" />
       </geometry>
     </collision>
   </link>
@@ -413,7 +413,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_roll_r_link.STL" />
+          filename="../meshes/hip_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -421,13 +421,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.001948 -0.029494 -0.030633"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_roll_r_link.STL" />
+        <box
+          size="0.176494 0.110621 0.112739" />
       </geometry>
     </collision>
   </link>
@@ -467,7 +467,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_r_link.STL" />
+          filename="../meshes/hip_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -475,13 +475,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.003928 -0.001250 -0.010600"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_pitch_r_link.STL" />
+        <box
+          size="0.156028 0.107964 0.164880" />
       </geometry>
     </collision>
   </link>
@@ -489,10 +489,10 @@
     name="hip_pitch_r_joint"
     type="revolute">
     <origin
-      xyz="0 -0.122 -0.046"
+      xyz="0 -0.094 0.0987"
       rpy="0 0 0" />
     <parent
-      link="hip_roll_r_link" />
+      link="hip_yaw_r_link" />
     <child
       link="hip_pitch_r_link" />
     <axis
@@ -521,7 +521,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_r_link.STL" />
+          filename="../meshes/hip_yaw_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -529,13 +529,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.006090 -0.009382 -0.168814"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/hip_yaw_r_link.STL" />
+        <box
+          size="0.155855 0.141082 0.309265" />
       </geometry>
     </collision>
   </link>
@@ -543,15 +543,15 @@
     name="hip_yaw_r_joint"
     type="revolute">
     <origin
-      xyz="0 0 -0.0987"
+      xyz="0 -0.028 -0.1317"
       rpy="0 0 0" />
     <parent
-      link="hip_pitch_r_link" />
+      link="hip_roll_r_link" />
     <child
       link="hip_yaw_r_link" />
     <axis
       xyz="0 0 1" />
-    <limit effort="160" lower="-1.04" upper="1.04" velocity="15.6"/>  
+    <limit effort="160" lower="-1.04" upper="1.04" velocity="15.6"/>
   </joint>
 
   <link
@@ -576,7 +576,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_r_link.STL" />
+          filename="../meshes/knee_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -584,13 +584,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.005643 -0.000134 -0.182957"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/knee_pitch_r_link.STL" />
+        <box
+          size="0.084733 0.083552 0.424877" />
       </geometry>
     </collision>
   </link>
@@ -599,10 +599,10 @@
     name="knee_pitch_r_joint"
     type="revolute">
     <origin
-      xyz="0 0.00015001 -0.3013"
+      xyz="0 0 -0.413"
       rpy="0 0 0" />
     <parent
-      link="hip_yaw_r_link" />
+      link="hip_pitch_r_link" />
     <child
       link="knee_pitch_r_link" />
     <axis
@@ -632,7 +632,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_r_link.STL" />
+          filename="../meshes/ankle_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -640,13 +640,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000000 0.000000 0.000000"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_pitch_r_link.STL" />
+        <box
+          size="0.059400 0.059400 0.021600" />
       </geometry>
     </collision>
   </link>
@@ -688,7 +688,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_r_link.STL" />
+          filename="../meshes/ankle_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -696,13 +696,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.039545 0.000001 -0.012256"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/ankle_roll_r_link.STL" />
+        <box
+          size="0.253435 0.105883 0.085941" />
       </geometry>
     </collision>
   </link>
@@ -744,7 +744,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/waist_yaw_link.STL" />
+          filename="../meshes/waist_yaw_link.STL" />
       </geometry>
       <material
         name="">
@@ -752,13 +752,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.006147 0.000000 0.282739"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/waist_yaw_link.STL" />
+        <box
+          size="0.254932 0.292847 0.514330" />
       </geometry>
     </collision>
   </link>
@@ -800,7 +800,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/head_yaw_link.STL" />
+          filename="../meshes/head_yaw_link.STL" />
       </geometry>
       <material
         name="">
@@ -808,13 +808,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.012912 -0.000002 0.009336"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/head_yaw_link.STL" />
+        <box
+          size="0.100397 0.090342 0.083758" />
       </geometry>
     </collision>
   </link>
@@ -856,7 +856,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/head_pitch_link.STL" />
+          filename="../meshes/head_pitch_link.STL" />
       </geometry>
       <material
         name="">
@@ -864,13 +864,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="-0.000750 0.000100 0.000000"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/head_pitch_link.STL" />
+        <box
+          size="0.069514 0.068940 0.059773" />
       </geometry>
     </collision>
   </link>
@@ -912,7 +912,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/head_roll_link.STL" />
+          filename="../meshes/head_roll_link.STL" />
       </geometry>
       <material
         name="">
@@ -920,13 +920,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.008712 -0.000006 0.045594"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/head_roll_link.STL" />
+        <box
+          size="0.242521 0.151702 0.235080" />
       </geometry>
     </collision>
   </link>
@@ -946,7 +946,8 @@
     <limit effort="9" lower="-0.43" upper="0.43" velocity="7.2"/>
   </joint>
 
-<link
+<!-- 固定关节已注释：camera_head_link 和 camera_head_joint
+  <link
     name="camera_head_link">
     <inertial>
       <origin
@@ -968,7 +969,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/camera_head_link.STL" />
+          filename="../meshes/camera_head_link.STL" />
       </geometry>
       <material
         name="">
@@ -982,7 +983,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/camera_head_link.STL" />
+          filename="../meshes/camera_head_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1000,6 +1001,7 @@
     <axis
       xyz="0 0 0" />
   </joint>
+-->
 
   <link
     name="shoulder_pitch_l_link">
@@ -1023,7 +1025,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_l_link.STL" />
+          filename="../meshes/shoulder_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1031,13 +1033,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="-0.002750 0.051750 0.000000"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_l_link.STL" />
+        <box
+          size="0.089370 0.108115 0.081526" />
       </geometry>
     </collision>
   </link>
@@ -1079,7 +1081,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_l_link.STL" />
+          filename="../meshes/shoulder_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1087,13 +1089,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000361 0.000718 -0.030015"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_l_link.STL" />
+        <box
+          size="0.102233 0.103086 0.145652" />
       </geometry>
     </collision>
   </link>
@@ -1135,7 +1137,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_l_link.STL" />
+          filename="../meshes/shoulder_yaw_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1143,13 +1145,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.003525 -0.001701 -0.110750"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_l_link.STL" />
+        <box
+          size="0.089051 0.104139 0.222196" />
       </geometry>
     </collision>
   </link>
@@ -1191,7 +1193,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_l_link.STL" />
+          filename="../meshes/elbow_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1199,13 +1201,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="-0.012745 -0.000001 -0.012293"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_l_link.STL" />
+        <box
+          size="0.084123 0.098719 0.091021" />
       </geometry>
     </collision>
   </link>
@@ -1248,7 +1250,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_l_link.STL" />
+          filename="../meshes/elbow_yaw_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1256,13 +1258,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000340 0.006105 -0.098350"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_l_link.STL" />
+        <box
+          size="0.070769 0.099862 0.199759" />
       </geometry>
     </collision>
   </link>
@@ -1304,7 +1306,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_l_link.STL" />
+          filename="../meshes/wrist_pitch_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1312,13 +1314,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.001350 0.001750 -0.018263"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_l_link.STL" />
+        <box
+          size="0.070290 0.061385 0.053836" />
       </geometry>
     </collision>
   </link>
@@ -1360,7 +1362,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_l_link.STL" />
+          filename="../meshes/wrist_roll_l_link.STL" />
       </geometry>
       <material
         name="">
@@ -1368,13 +1370,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.001949 -0.000005 -0.005723"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_l_link.STL" />
+        <box
+          size="0.073159 0.061803 0.066398" />
       </geometry>
     </collision>
   </link>
@@ -1416,7 +1418,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_r_link.STL" />
+          filename="../meshes/shoulder_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1424,13 +1426,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="-0.002750 -0.051750 0.000000"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_pitch_r_link.STL" />
+        <box
+          size="0.089370 0.108115 0.081526" />
       </geometry>
     </collision>
   </link>
@@ -1472,7 +1474,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_r_link.STL" />
+          filename="../meshes/shoulder_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1480,13 +1482,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000361 -0.000718 -0.030015"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_roll_r_link.STL" />
+        <box
+          size="0.102233 0.103086 0.145652" />
       </geometry>
     </collision>
   </link>
@@ -1526,7 +1528,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_r_link.STL" />
+          filename="../meshes/shoulder_yaw_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1534,13 +1536,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.003525 0.001701 -0.110750"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/shoulder_yaw_r_link.STL" />
+        <box
+          size="0.089051 0.104139 0.222196" />
       </geometry>
     </collision>
   </link>
@@ -1580,7 +1582,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_r_link.STL" />
+          filename="../meshes/elbow_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1588,13 +1590,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="-0.012745 0.000001 -0.012293"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_pitch_r_link.STL" />
+        <box
+          size="0.084123 0.098719 0.091021" />
       </geometry>
     </collision>
   </link>
@@ -1634,7 +1636,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_r_link.STL" />
+          filename="../meshes/elbow_yaw_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1642,13 +1644,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.000340 -0.006105 -0.098350"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/elbow_yaw_r_link.STL" />
+        <box
+          size="0.070769 0.099862 0.199759" />
       </geometry>
     </collision>
   </link>
@@ -1688,7 +1690,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_r_link.STL" />
+          filename="../meshes/wrist_pitch_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1696,13 +1698,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.001350 -0.001750 -0.018263"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_pitch_r_link.STL" />
+        <box
+          size="0.070290 0.061385 0.053836" />
       </geometry>
     </collision>
   </link>
@@ -1742,7 +1744,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_r_link.STL" />
+          filename="../meshes/wrist_roll_r_link.STL" />
       </geometry>
       <material
         name="">
@@ -1750,13 +1752,13 @@
           rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
       </material>
     </visual>
-    <collision>
+        <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0.001949 0.000005 -0.005723"
         rpy="0 0 0" />
       <geometry>
-        <mesh
-          filename="package://walker_tienkung_ei_description/meshes/wrist_roll_r_link.STL" />
+        <box
+          size="0.073159 0.061803 0.066398" />
       </geometry>
     </collision>
   </link>
@@ -1776,7 +1778,8 @@
   </joint>
 
 
-<link
+<!-- 固定关节已注释：camera_body_front_link 和 camera_body_front_joint
+  <link
     name="camera_body_front_link">
     <inertial>
       <origin
@@ -1798,7 +1801,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/camera_body_front_link.STL" />
+          filename="../meshes/camera_body_front_link.STL" />
       </geometry>
       <material
         name="">
@@ -1812,7 +1815,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/camera_body_front_link.STL" />
+          filename="../meshes/camera_body_front_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1829,6 +1832,8 @@
     <axis
       xyz="0 0 0" />
   </joint>
+-->
+  <!-- 固定关节已注释：camera_body_back_link 和 camera_body_back_joint
   <link
     name="camera_body_back_link">
     <inertial>
@@ -1851,7 +1856,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/camera_body_back_link.STL" />
+          filename="../meshes/camera_body_back_link.STL" />
       </geometry>
       <material
         name="">
@@ -1865,7 +1870,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://walker_tienkung_ei_description/meshes/camera_body_back_link.STL" />
+          filename="../meshes/camera_body_back_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -1882,4 +1887,5 @@
     <axis
       xyz="0 0 0" />
   </joint>
+-->
 </robot>

@@ -40,6 +40,9 @@ AI 充当「半自动训练工程师」。
 ！注意！
 当给出命令行时，不要使用换行，否则粘贴进终端会格式错误。
 
+本地统一用 PowerShell；SSH 统一调用 C:\Windows\System32\OpenSSH\ssh.exe；涉及远端 Linux 命令时，在远端用 bash -lc 执行。
+在给出的命令前标明是powershell还是gitbash其他的什么
+
 而且注意要给出Windows Powershell能处理的命令行，不要出现“&&”等powershell无法识别的问题
 
 ---

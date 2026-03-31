@@ -69,3 +69,5 @@ motion_data/*bvh
 motion_data/CMU_fbx
 motion_data/*_npy
 motion_data/amass_motions
+
+assets

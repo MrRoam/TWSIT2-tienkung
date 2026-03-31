@@ -1,4 +1,4 @@
-root_path: /root/TWIST2/pyroki/outputs_new
+root_path: /home/yaojiaxu/TWIST2/pyroki/outputs
 motions:
   - file: aiming1_subject1.pkl
     weight: 1.0

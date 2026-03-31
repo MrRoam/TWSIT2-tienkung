@@ -7,12 +7,12 @@
 
 cd legged_gym/legged_gym/scripts
 
-robot_name="g1"
+robot_name="tienkung"
 exptid=$1
 device=$2
 
-task_name="${robot_name}_stu_future"
-proj_name="${robot_name}_stu_future"
+task_name="${robot_name}_mimic"
+proj_name="${robot_name}_mimic"
 
 
 # Run the training script

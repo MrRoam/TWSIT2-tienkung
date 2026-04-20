@@ -234,6 +234,7 @@ class HumanoidChar(LeggedRobot):
         self.check_termination()
         self.compute_reward()
         env_ids = self.reset_buf.nonzero(as_tuple=False).flatten()
+        self._maybe_log_debug_step(env_ids)
 
         self.episode_length[env_ids] = self.episode_length_buf[env_ids].float()
 
@@ -260,6 +261,9 @@ class HumanoidChar(LeggedRobot):
             self.gym.clear_lines(self.viewer)
             self.draw_key_bodies_actual()
             self.draw_key_bodies_motion()
+
+    def _maybe_log_debug_step(self, env_ids):
+        return
         
         
     
@@ -457,7 +461,7 @@ class HumanoidChar(LeggedRobot):
         #         gymutil.draw_lines(geom, self.gym, self.viewer, self.envs[id], pose)
 
         # draw global whole body
-        draw_gloabl = True
+        draw_gloabl = False
         if draw_gloabl:
             # color = (0, 1, 1)
             color = (0, 1, 0)

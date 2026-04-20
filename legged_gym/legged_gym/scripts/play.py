@@ -45,9 +45,11 @@ def get_load_path(root, load_run=-1, checkpoint=-1, model_name_include="jit"):
         checkpoint = model.split("_")[-1].split(".")[0]
     return model, checkpoint
 
-def set_play_cfg(env_cfg):
-    env_cfg.env.num_envs = 2#2 if not args.num_envs else args.num_envs
+def set_play_cfg(env_cfg, args):
+    env_cfg.env.num_envs = args.num_envs if args.num_envs is not None else 1
     env_cfg.env.debug_viz = True
+    env_cfg.env.no_reset_on_viewer = True
+    env_cfg.env.viewer_reset_delay_s = 1.5
     env_cfg.env.episode_length_s = 60
     # env_cfg.commands.resampling_time = 60
     env_cfg.terrain.num_rows = 5
@@ -87,7 +89,7 @@ def play(args):
     
     env_cfg, train_cfg = task_registry.get_cfgs(name=args.task)
 
-    set_play_cfg(env_cfg)
+    set_play_cfg(env_cfg, args)
 
     env_cfg.env.record_video = args.record_video
     env_cfg.env.rand_reset = False

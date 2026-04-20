@@ -1,0 +1,28 @@
+root_path: /data/shared_folder/datasets/twist2_g1/TWIST2_full
+motions:
+- file: twist1_to_twist2/transitions_punchboxing_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_punchkarate_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_kick_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_turntwist_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_walksideways_kick.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_dance_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_twistdance_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_dance_stand.pkl
+  weight: 1.0
+- file: twist1_to_twist2/transitions_punchboxing_stand.pkl
+  weight: 1.0
+- file: AMASS_g1_GMR8/ACCAD_MartialArtsWalksTurns_c3d_E3_-_advance_stageii.pkl
+  weight: 1.0
+- file: AMASS_g1_GMR8/ACCAD_MartialArtsWalksTurns_c3d_E5_-_retreat_stageii.pkl
+  weight: 1.0
+- file: AMASS_g1_GMR8/ACCAD_MartialArtsWalksTurns_c3d_E9_-_side_step_left_stageii.pkl
+  weight: 1.0
+- file: AMASS_g1_GMR8/ACCAD_MartialArtsWalksTurns_c3d_E10_-_side_step_right_stageii.pkl
+  weight: 1.0

@@ -26,6 +26,14 @@ class HumanoidMimic(HumanoidChar):
         self._pose_termination = cfg.env.pose_termination
         self._pose_termination_dist = cfg.env.pose_termination_dist
         self._root_tracking_termination_dist = cfg.env.root_tracking_termination_dist
+        # Keep defaults aligned with the historical hard-coded values; this only exposes them
+        # for CLI-based 100-iteration A/B tests and does not change current behavior by itself.
+        self._reset_ref_vel_factor = getattr(cfg.env, "reset_ref_vel_factor", 0.8)
+        self._contact_force_termination_threshold = getattr(
+            cfg.env, "contact_force_termination_threshold", 1.0
+        )
+        self._no_reset_on_viewer = getattr(cfg.env, "no_reset_on_viewer", False)
+        self._viewer_reset_delay_s = getattr(cfg.env, "viewer_reset_delay_s", 0.0)
         self._tar_motion_steps_priv = cfg.env.tar_motion_steps_priv
         self._tar_motion_steps_priv = torch.tensor(self._tar_motion_steps_priv, device=sim_device, dtype=torch.int)
         self._tar_motion_steps = cfg.env.tar_motion_steps
@@ -72,6 +80,8 @@ class HumanoidMimic(HumanoidChar):
         
         self.deviate_tracking_frames = torch.zeros((self.num_envs), device=self.device, dtype=torch.float)
         self.deviate_vel_tracking_frames = torch.zeros((self.num_envs), device=self.device, dtype=torch.float)
+        self._viewer_failed_mask = torch.zeros((self.num_envs), device=self.device, dtype=torch.bool)
+        self._viewer_failed_elapsed = torch.zeros((self.num_envs), device=self.device, dtype=torch.float)
         self.reset_idx(torch.arange(self.num_envs, device=self.device))
     
     def _get_max_motion_len(self):
@@ -229,21 +239,28 @@ class HumanoidMimic(HumanoidChar):
         # fill extras
         self.extras["episode"] = {}
         for key in self.episode_sums.keys():
-            self.extras["episode"]['metric_' + key] = torch.mean(self.episode_sums[key][env_ids] / self._motion_lib.get_motion_length(self._motion_ids[env_ids]))
-            self.extras["episode"]['rew_' + key] = torch.mean(self.episode_sums[key][env_ids] * self.reward_scales[key] / self._motion_lib.get_motion_length(self._motion_ids[env_ids]))
+            motion_lengths = self._motion_lib.get_motion_length(self._motion_ids[env_ids])
+            raw_rew_per_sec = self.episode_sums[key][env_ids] / motion_lengths
+            # Logging note: humanoid_char.compute_reward() stores raw reward values in episode_sums,
+            # so metric_* should expose the raw value while rew_* keeps the actually scaled contribution.
+            self.extras["episode"]['metric_' + key] = torch.mean(raw_rew_per_sec)
+            self.extras["episode"]['rew_' + key] = torch.mean(raw_rew_per_sec * self.reward_scales[key])
             self.episode_sums[key][env_ids] = 0.
         
         for key in self.episode_means.keys():
             self.extras["episode"]['error_' + key] = torch.mean(self.episode_means[key][env_ids])
             self.episode_means[key][env_ids] = 0.
+
+        # Training debug helper: expose reset reasons in the episode logs so early-termination
+        # regressions can be diagnosed without opening the viewer. Safe to remove after debugging.
+        self._log_reset_reason_stats(env_ids)
             
         if self.cfg.motion.motion_curriculum:
             self._update_motion_difficulty(env_ids)
         self._reset_ref_motion(env_ids=env_ids, motion_ids=motion_ids)
         
    
-        # vel_factor = 1.0
-        vel_factor = 0.8
+        vel_factor = self._reset_ref_vel_factor
 
         # RSI
         self._reset_dofs(env_ids, self._ref_dof_pos, self._ref_dof_vel*vel_factor)
@@ -267,6 +284,8 @@ class HumanoidMimic(HumanoidChar):
         self.feet_land_time[env_ids] = 0.
         self.deviate_tracking_frames[env_ids] = 0.
         self.deviate_vel_tracking_frames[env_ids] = 0.
+        self._viewer_failed_mask[env_ids] = False
+        self._viewer_failed_elapsed[env_ids] = 0.
         self._reset_buffers_extra(env_ids)
 
         self.episode_length_buf[env_ids] = 0
@@ -281,6 +300,84 @@ class HumanoidMimic(HumanoidChar):
         _, _, y = euler_from_quaternion(self.root_states[:, 3:7])
         self.init_yaw[env_ids] = y[env_ids]
         return
+
+    def _log_reset_reason_stats(self, env_ids):
+        # The termination debug flags are created in check_termination(); they do not exist yet during
+        # the init-time reset inside constructor setup.
+        if not hasattr(self, "_debug_contact_force_termination"):
+            return
+
+        debug_flags = {
+            "reset_contact_force": self._debug_contact_force_termination,
+            "reset_height_cutoff": self._debug_height_cutoff,
+            "reset_roll_cut": self._debug_roll_cut,
+            "reset_pitch_cut": self._debug_pitch_cut,
+            "reset_motion_end": self._debug_motion_end,
+            "reset_time_out": self._debug_time_out,
+            "reset_vel_too_large": self._debug_vel_too_large,
+            "reset_pose_fail": self._debug_pose_fail,
+        }
+
+        # Component stats can overlap; they tell us which conditions were simultaneously true.
+        for key, flag in debug_flags.items():
+            self.extras["episode"][key] = torch.mean(flag[env_ids].float())
+
+        # Primary stats use the same priority as the viewer debug print so a run summary has one
+        # dominant reason per reset env and is easier to read back later.
+        remaining = torch.ones(len(env_ids), dtype=torch.bool, device=self.device)
+        ordered_flags = [
+            ("reset_primary_contact_force", self._debug_contact_force_termination[env_ids]),
+            ("reset_primary_height_cutoff", self._debug_height_cutoff[env_ids]),
+            ("reset_primary_roll_cut", self._debug_roll_cut[env_ids]),
+            ("reset_primary_pitch_cut", self._debug_pitch_cut[env_ids]),
+            ("reset_primary_motion_end", self._debug_motion_end[env_ids]),
+            ("reset_primary_vel_too_large", self._debug_vel_too_large[env_ids]),
+            ("reset_primary_pose_fail", self._debug_pose_fail[env_ids]),
+        ]
+        for key, flag in ordered_flags:
+            primary = flag & remaining
+            self.extras["episode"][key] = torch.mean(primary.float())
+            remaining &= ~primary
+        self.extras["episode"]["reset_primary_unknown"] = torch.mean(remaining.float())
+
+        # Training debug helper: break contact-force resets down by the exact termination body names
+        # so locomotion failures can be traced to a specific body instead of the aggregate contact term.
+        if len(self.termination_contact_indices) > 0:
+            contact_force_flags = torch.norm(
+                self.contact_forces[env_ids][:, self.termination_contact_indices, :], dim=-1
+            ) > self._contact_force_termination_threshold
+            for local_idx, body_name in enumerate(self._get_termination_contact_body_names()):
+                metric_name = f"reset_contact_body_{self._sanitize_debug_metric_name(body_name)}"
+                self.extras["episode"][metric_name] = torch.mean(contact_force_flags[:, local_idx].float())
+
+    def _sanitize_debug_metric_name(self, name):
+        return name.replace("/", "_").replace("-", "_").replace(".", "_")
+
+    def _get_termination_contact_body_names(self):
+        if hasattr(self, "_termination_contact_body_names"):
+            return self._termination_contact_body_names
+
+        body_names = []
+        for body_idx in self.termination_contact_indices.detach().cpu().tolist():
+            body_idx = int(body_idx)
+            if 0 <= body_idx < len(self.body_names):
+                body_names.append(self.body_names[body_idx])
+            else:
+                body_names.append(f"body_{body_idx}")
+        self._termination_contact_body_names = body_names
+        return self._termination_contact_body_names
+
+    def _get_env_termination_contact_summary(self, env_id, threshold=1.0):
+        if len(self.termination_contact_indices) == 0:
+            return []
+
+        contact_norm = torch.norm(self.contact_forces[env_id, self.termination_contact_indices, :], dim=-1)
+        over_threshold = (contact_norm > threshold).nonzero(as_tuple=False).flatten()
+        body_names = self._get_termination_contact_body_names()
+        return [
+            f"{body_names[int(local_idx)]}:{float(contact_norm[int(local_idx)].item()):.2f}"
+            for local_idx in over_threshold.tolist()
+        ]
     
     def _hard_sync_motion_loop(self):
         motion_times = self._get_motion_times()
@@ -402,10 +499,84 @@ class HumanoidMimic(HumanoidChar):
         # Update max key body error for error aware sampling
         if hasattr(self.cfg.motion, 'use_error_aware_sampling') and self.cfg.motion.use_error_aware_sampling:
             self._update_max_key_body_error()
+
+    def _maybe_log_debug_step(self, env_ids):
+        if not getattr(self, "debug_runtime", False):
+            return
+
+        log_interval = max(1, int(getattr(self, "debug_log_interval", 24)))
+        should_log_step = (self.common_step_counter % log_interval == 0)
+        has_resets = len(env_ids) > 0
+        if not should_log_step and not has_resets:
+            return
+
+        env_id = 0
+        motion_id = int(self._motion_ids[env_id].item())
+        motion_name = self.motion_names[motion_id] if hasattr(self, "motion_names") else str(motion_id)
+        motion_time = float(self._get_motion_times()[env_id].item())
+        root_pos_err = float(torch.norm(self.root_states[env_id, :3] - self._ref_root_pos[env_id]).item())
+        root_height_err = float(torch.abs(self.root_states[env_id, 2] - self._ref_root_pos[env_id, 2]).item())
+
+        if hasattr(self, "_active_dof_indices"):
+            dof_error = self.dof_pos[env_id, self._active_dof_indices] - self._ref_dof_pos[env_id, self._active_dof_indices]
+            torque_view = self.torques[env_id, self._active_dof_indices]
+            action_view = self.actions[env_id]
+        else:
+            dof_error = self.dof_pos[env_id] - self._ref_dof_pos[env_id]
+            torque_view = self.torques[env_id]
+            action_view = self.actions[env_id]
+
+        mean_dof_err = float(torch.mean(torch.abs(dof_error)).item())
+        action_abs_max = float(torch.max(torch.abs(action_view)).item())
+        torque_abs_max = float(torch.max(torch.abs(torque_view)).item())
+
+        if should_log_step:
+            print(
+                "[debug step] "
+                f"step={self.common_step_counter} env0_motion={motion_id}:{motion_name} "
+                f"t={motion_time:.3f}s rew={float(self.rew_buf[env_id].item()):.4f} "
+                f"root_err={root_pos_err:.4f} z_err={root_height_err:.4f} "
+                f"dof_mae={mean_dof_err:.4f} action_max={action_abs_max:.4f} "
+                f"torque_max={torque_abs_max:.4f}"
+            )
+
+        if has_resets:
+            reason_counts = []
+            debug_reason_names = [
+                ("contact", "_debug_contact_force_termination"),
+                ("height", "_debug_height_cutoff"),
+                ("roll", "_debug_roll_cut"),
+                ("pitch", "_debug_pitch_cut"),
+                ("motion_end", "_debug_motion_end"),
+                ("timeout", "_debug_time_out"),
+                ("vel", "_debug_vel_too_large"),
+                # Training debug helper: include pose tracking failures in the one-line viewer print
+                # so early-reset regressions can be localized quickly. Safe to remove after debugging.
+                ("pose", "_debug_pose_fail"),
+            ]
+            for label, attr_name in debug_reason_names:
+                if hasattr(self, attr_name):
+                    count = int(getattr(self, attr_name)[env_ids].sum().item())
+                    if count > 0:
+                        reason_counts.append(f"{label}={count}")
+
+            reason_msg = ", ".join(reason_counts) if reason_counts else "unknown"
+            print(
+                "[debug reset] "
+                f"step={self.common_step_counter} count={len(env_ids)} reasons={reason_msg}"
+            )
             
     def check_termination(self):
-        contact_force_termination = torch.any(torch.norm(self.contact_forces[:, self.termination_contact_indices, :], dim=-1) > 1., dim=1)
+        contact_force_termination = torch.any(
+            torch.norm(self.contact_forces[:, self.termination_contact_indices, :], dim=-1)
+            > self._contact_force_termination_threshold,
+            dim=1,
+        )
         self.reset_buf = contact_force_termination.clone()
+        # Training debug helper: default these to all-false so reset logging works even when pose
+        # termination is temporarily disabled. Safe to remove after debugging.
+        pose_fail = torch.zeros_like(self.reset_buf, dtype=torch.bool)
+        root_pos_fail = torch.zeros_like(self.reset_buf, dtype=torch.bool)
         
         # height_cutoff = self.root_states[:, 2] < self.cfg.rewards.termination_height
         root_height_diff = torch.abs(self.root_states[:, 2] - self._ref_root_pos[:, 2])
@@ -430,6 +601,15 @@ class HumanoidMimic(HumanoidChar):
         
         vel_too_large = torch.norm(self.root_states[:, 7:10], dim=-1) > 5.
         self.reset_buf |= vel_too_large
+
+        # Keep the latest termination components available for debug-mode logging.
+        self._debug_contact_force_termination = contact_force_termination
+        self._debug_height_cutoff = height_cutoff
+        self._debug_roll_cut = roll_cut
+        self._debug_pitch_cut = pitch_cut
+        self._debug_motion_end = motion_end
+        self._debug_time_out = self.time_out_buf
+        self._debug_vel_too_large = vel_too_large
         
         if self._pose_termination:
             body_pos = self.rigid_body_states[:, self._key_body_ids, 0:3] - self.rigid_body_states[:, 0:1, 0:3]
@@ -465,22 +645,47 @@ class HumanoidMimic(HumanoidChar):
                 root_pos_fail = root_pos_fail.squeeze(-1)
                 pose_fail |= root_pos_fail
             self.reset_buf |= pose_fail
+
+        # Training debug helper: stash pose-related termination bits for episode summaries.
+        # Safe to remove after debugging once the early-reset issue is understood.
+        self._debug_pose_fail = pose_fail
+        self._debug_root_pos_fail = root_pos_fail
         
         first_step = self.episode_length_buf == 0
 
         self.reset_buf[first_step] = 0 # Do not reset on first step
-        
-        # if self.viewer is not None:
-        #     # if use viewer, just not reset.
-        #     self.reset_buf = torch.zeros_like(self.reset_buf)
-        
-        # print reset reason
+
+        viewer_hold_fail_pose = self.viewer is not None and self._no_reset_on_viewer
+        pending_fail_ids = None
+        if viewer_hold_fail_pose:
+            current_fail = self.reset_buf.clone()
+            new_fail = current_fail & ~self._viewer_failed_mask
+            if new_fail.any():
+                pending_fail_ids = new_fail.nonzero(as_tuple=False).flatten()
+
+            self._viewer_failed_mask |= current_fail
+            self._viewer_failed_elapsed[self._viewer_failed_mask] += self.dt
+            self._viewer_failed_elapsed[new_fail] = 0.0
+
+            if self._viewer_reset_delay_s > 0.0:
+                self.reset_buf = self._viewer_failed_mask & (self._viewer_failed_elapsed >= self._viewer_reset_delay_s)
+            else:
+                self.reset_buf = torch.zeros_like(self.reset_buf)
+
+        reset_ids = None
         if self.viewer is not None and self.reset_buf.any():
             reset_ids = self.reset_buf.nonzero(as_tuple=False).flatten()
+        elif pending_fail_ids is not None and len(pending_fail_ids) > 0:
+            reset_ids = pending_fail_ids
+
+        if reset_ids is not None:
             for id in reset_ids:
                 reset_reason = ""
                 if contact_force_termination[id]:
                     reset_reason = "contact force"
+                    contact_bodies = self._get_env_termination_contact_summary(id)
+                    if contact_bodies:
+                        reset_reason += f" ({', '.join(contact_bodies)})"
                 elif height_cutoff[id]:
                     reset_reason = "height cutoff"
                     print("height diff: ", root_height_diff[id])
@@ -496,12 +701,8 @@ class HumanoidMimic(HumanoidChar):
                     reset_reason = "velocity too large"
                 elif self._pose_termination and pose_fail[id]:
                     reset_reason = "pose tracking failure"
-                print(f"Env {id} reset due to: {reset_reason}")
-            
-            # not reset if we are using viewer
-            # if self.viewer is not None:
-            #     self.reset_buf = torch.zeros_like(self.reset_buf)
-            #     print("not reset")
+                prefix = "would reset" if viewer_hold_fail_pose and not self.reset_buf[id] else "reset"
+                print(f"Env {id} {prefix} due to: {reset_reason}")
         
 
     def _get_mimic_obs(self):

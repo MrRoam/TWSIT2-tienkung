@@ -1,0 +1,6 @@
+root_path: /data/shared_folder/GMR/outputs/tienkung_ei_accad_train20260329_120924
+motions:
+# Diagnostic one-motion curriculum: use a single straight walking clip first so
+# reward/termination/PD issues are easier to isolate. Safe to delete after bring-up.
+- file: "Female1Walking_c3d/B3_-_walk1_stageii.pkl"
+  weight: 1.0

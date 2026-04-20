@@ -227,6 +227,13 @@ def update_cfg_from_args(env_cfg, cfg_train, args):
         print("Applying config overrides:")
         for config_path, value in args.config_overrides.items():
             try:
+                # Skip unmatched prefixed overrides to avoid noisy warnings when
+                # update_cfg_from_args is called with only env_cfg or only cfg_train.
+                if config_path.startswith('env.') and env_cfg is None:
+                    continue
+                if config_path.startswith('train.') and cfg_train is None:
+                    continue
+
                 # Try to apply to env_cfg with env. prefix
                 if env_cfg is not None and config_path.startswith('env.'):
                     # Remove 'env.' prefix for env_cfg

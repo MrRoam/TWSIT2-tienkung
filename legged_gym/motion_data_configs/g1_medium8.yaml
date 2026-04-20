@@ -1,0 +1,18 @@
+root_path: /data/shared_folder/datasets/twist2_g1/TWIST2_full
+motions:
+- file: twist1_to_twist2/accad_B1___stand_to_walk.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_B10___walk_turn_left__45_.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_B12___walk_turn_right__90_.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_B11___walk_turn_left__135_.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_B14___walk_turn_right__135_.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_B16___walk_turn_change_direction.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_Walk_B16___Walk_turn_change.pkl
+  weight: 1.0
+- file: twist1_to_twist2/accad_Walk_B4___Stand_to_Walk_Back.pkl
+  weight: 1.0

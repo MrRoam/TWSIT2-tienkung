@@ -38,6 +38,31 @@ from legged_gym.gym_utils import get_args, task_registry
 import torch
 import wandb
 
+def _init_wandb(args, mode):
+    project = os.environ.get("WANDB_PROJECT", args.proj_name)
+    entity = os.environ.get("WANDB_ENTITY", None)
+    api_key = os.environ.get("WANDB_API_KEY", None)
+
+    if mode == "disabled":
+        wandb.init(project=project, name=args.exptid, mode="disabled", dir="../../logs")
+        return
+
+    if api_key:
+        try:
+            wandb.login(key=api_key, relogin=True)
+        except Exception as e:
+            print(f"[train.py] wandb.login failed: {e}")
+
+    init_kwargs = dict(project=project, name=args.exptid, mode=mode, dir="../../logs")
+    if entity:
+        init_kwargs["entity"] = entity
+
+    try:
+        wandb.init(**init_kwargs)
+    except Exception as e:
+        print(f"[train.py] wandb.init failed, fallback to disabled mode: {e}")
+        wandb.init(project=project, name=args.exptid, mode="disabled", dir="../../logs")
+
 def train(args):
     args.headless = True
     
@@ -62,10 +87,7 @@ def train(args):
         
     robot_type = args.task.split("_")[0]
     
-    try:
-        wandb.init(entity="far-wandb", project="twist", name=args.exptid, mode=mode, dir="../../logs")
-    except:
-        wandb.init(project="g1_mimic", name=args.exptid, mode=mode, dir="../../logs")
+    _init_wandb(args, mode)
     # wandb.save(LEGGED_GYM_ENVS_DIR + "/base/legged_robot_config.py", policy="now")
     # wandb.save(LEGGED_GYM_ENVS_DIR + "/base/legged_robot.py", policy="now")
     # wandb.save(LEGGED_GYM_ENVS_DIR + "/base/humanoid_config.py", policy="now")
@@ -74,6 +96,8 @@ def train(args):
         wandb.save(LEGGED_GYM_ENVS_DIR + "/g1/g1_mimic_distill_config.py", policy="now")
     
     env, _ = task_registry.make_env(name=args.task, args=args)
+    env.debug_runtime = bool(args.debug)
+    env.debug_log_interval = 24
     print(f"Using motion file: {env.cfg.motion.motion_file}")
     ppo_runner, train_cfg = task_registry.make_alg_runner(log_root=log_pth, env=env, name=args.task, args=args)
     ppo_runner.learn(num_learning_iterations=train_cfg.runner.max_iterations, init_at_random_ep_len=True)

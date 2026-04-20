@@ -45,6 +45,39 @@ from .g1.g1_mimic_distill_config import G1MimicStuRLCfg, G1MimicStuRLCfgDAgger
 from .g1.g1_mimic_future import G1MimicFuture
 from .g1.g1_mimic_future_config import G1MimicStuFutureCfg, G1MimicStuFutureCfgDAgger
 
+from .tienkung_2_0.tienkung_mimic import TienkungMimic
+from .tienkung_2_0.tienkung_mimic_config import TienkungMimicCfg, TienkungMimicCfgPPO
+from .tienkung_2_0.tienkung_mimic_distill import TienkungMimicDistill
+from .tienkung_2_0.tienkung_mimic_distill_config import (
+    TienkungMimicPrivCfg,
+    TienkungMimicPrivCfgPPO,
+    TienkungMimicStuCfg,
+    TienkungMimicStuCfgDAgger,
+    TienkungMimicStuRLCfg,
+    TienkungMimicStuRLCfgDAgger,
+)
+from .tienkung_2_0.tienkung_mimic_future import TienkungMimicFuture
+from .tienkung_2_0.tienkung_mimic_future_config import (
+    TienkungMimicStuFutureCfg,
+    TienkungMimicStuFutureCfgDAgger,
+)
+from .tienkung_2_0.tienkung_mimic_distill_cc_config import (
+    TienkungMimicPrivCCCfg,
+    TienkungMimicPrivCCCfgPPO,
+    TienkungMimicStuCCCfg,
+    TienkungMimicStuCCCfgDAgger,
+    TienkungMimicStuRLCCCfg,
+    TienkungMimicStuRLCCCfgDAgger,
+)
+from .tienkung_2_0.tienkung_mimic_future_cc_config import (
+    TienkungMimicStuFutureCCCfg,
+    TienkungMimicStuFutureCCCfgDAgger,
+)
+from .tienkung_2_0.tienkung_mimic_future_cc_stage1_config import (
+    TienkungMimicStuFutureCCStage1Cfg,
+    TienkungMimicStuFutureCCStage1CfgDAgger,
+)
+
 from legged_gym.gym_utils.task_registry import task_registry
 
 
@@ -54,5 +87,13 @@ task_registry.register("g1_stu_mimic", G1MimicDistill, G1MimicStuCfg(), G1MimicS
 task_registry.register("g1_priv_mimic", G1MimicDistill, G1MimicPrivCfg(), G1MimicPrivCfgPPO())
 task_registry.register("g1_stu_rl", G1MimicDistill, G1MimicStuRLCfg(), G1MimicStuRLCfgDAgger())
 task_registry.register("g1_stu_future", G1MimicFuture, G1MimicStuFutureCfg(), G1MimicStuFutureCfgDAgger())
-
-
+task_registry.register("tienkung_2_0_mimic", TienkungMimic, TienkungMimicCfg(), TienkungMimicCfgPPO())
+task_registry.register("tienkung_priv_mimic", TienkungMimicDistill, TienkungMimicPrivCfg(), TienkungMimicPrivCfgPPO())
+task_registry.register("tienkung_stu_mimic", TienkungMimicDistill, TienkungMimicStuCfg(), TienkungMimicStuCfgDAgger())
+task_registry.register("tienkung_stu_rl", TienkungMimicDistill, TienkungMimicStuRLCfg(), TienkungMimicStuRLCfgDAgger())
+task_registry.register("tienkung_stu_future", TienkungMimicFuture, TienkungMimicStuFutureCfg(), TienkungMimicStuFutureCfgDAgger())
+task_registry.register("tienkung_priv_mimic_cc", TienkungMimicDistill, TienkungMimicPrivCCCfg(), TienkungMimicPrivCCCfgPPO())
+task_registry.register("tienkung_stu_mimic_cc", TienkungMimicDistill, TienkungMimicStuCCCfg(), TienkungMimicStuCCCfgDAgger())
+task_registry.register("tienkung_stu_rl_cc", TienkungMimicDistill, TienkungMimicStuRLCCCfg(), TienkungMimicStuRLCCCfgDAgger())
+task_registry.register("tienkung_stu_future_cc", TienkungMimicFuture, TienkungMimicStuFutureCCCfg(), TienkungMimicStuFutureCCCfgDAgger())
+task_registry.register("tienkung_stu_future_cc_stage1", TienkungMimicFuture, TienkungMimicStuFutureCCStage1Cfg(), TienkungMimicStuFutureCCStage1CfgDAgger())

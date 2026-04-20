@@ -3,7 +3,7 @@ from legged_gym import LEGGED_GYM_ROOT_DIR
 
 
 class G1MimicPrivCfg(HumanoidMimicCfg):
-    class env(HumanoidMimicCfg.env):
+    class env(HumanoidMimicCfg.env): #观测、episode、reset、tracking 配置
         tar_motion_steps_priv = [1, 5, 10, 15, 20, 25, 30, 35, 40, 45,
                          50, 55, 60, 65, 70, 75, 80, 85, 90, 95,]
         
@@ -64,14 +64,14 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         global_obs = False
         # global_obs = True
     
-    class terrain(HumanoidMimicCfg.terrain):
+    class terrain(HumanoidMimicCfg.terrain): #平地进行训练
         # mesh_type = 'trimesh'
         mesh_type = 'plane'
         # height = [0, 0.02]
         height = [0, 0.00]
         horizontal_scale = 0.1
     
-    class init_state(HumanoidMimicCfg.init_state):
+    class init_state(HumanoidMimicCfg.init_state): #机器人初始姿态
         pos = [0, 0, 1.0]
         default_joint_angles = {
             'left_hip_pitch_joint': -0.2,
@@ -109,7 +109,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
             'right_wrist_yaw_joint': 0.0,
         }
     
-    class control(HumanoidMimicCfg.control):
+    class control(HumanoidMimicCfg.control): # PD 参数
                 
         stiffness = {'hip_yaw': 100,
                     'hip_roll': 100,
@@ -136,14 +136,14 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         decimation = 10
         # decimation = 4
     
-    class sim(HumanoidMimicCfg.sim):
+    class sim(HumanoidMimicCfg.sim): #仿真步长
         dt = 0.002 # 1/500
         # dt = 1/200 # 0.005
         
-    class normalization(HumanoidMimicCfg.normalization):
+    class normalization(HumanoidMimicCfg.normalization): #动作裁剪
         clip_actions = 5.0
     
-    class asset(HumanoidMimicCfg.asset):
+    class asset(HumanoidMimicCfg.asset): #机器人资产
         # file = f'{LEGGED_GYM_ROOT_DIR}/../assets/g1/g1_custom_collision.urdf'
         # file = f'{LEGGED_GYM_ROOT_DIR}/../assets/g1/g1_custom_collision_with_fixed_hand.urdf'
         file = f'{LEGGED_GYM_ROOT_DIR}/../assets/g1/g1_custom_collision_29dof.urdf'
@@ -183,7 +183,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         
         collapse_fixed_joints = False
     
-    class rewards(HumanoidMimicCfg.rewards):
+    class rewards(HumanoidMimicCfg.rewards): #奖励
         regularization_names = [
                         # "feet_stumble",
                         # "feet_contact_forces",
@@ -270,7 +270,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         root_height_diff_threshold = 0.3
         
 
-    class evaluations:
+    class evaluations: #评估指标
         tracking_joint_dof = True
         tracking_joint_vel = True
         tracking_root_translation = True
@@ -282,7 +282,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         tracking_root_rotation_delta_local = True
         
         
-    class domain_rand:
+    class domain_rand: #环境随机化
         domain_rand_general = True # manually set this, setting from parser does not work;
         
         randomize_gravity = (True and domain_rand_general)
@@ -312,7 +312,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         action_delay = (True and domain_rand_general)
         action_buf_len = 8
     
-    class noise(HumanoidMimicCfg.noise):
+    class noise(HumanoidMimicCfg.noise): #噪声配置
         # add_noise = False
         add_noise = True
         noise_increasing_steps = 50_000
@@ -324,7 +324,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
             gravity = 0.05
             imu = 0.1
         
-    class motion(HumanoidMimicCfg.motion):
+    class motion(HumanoidMimicCfg.motion): #数据集配置
         motion_curriculum = True
         motion_curriculum_gamma = 0.01
         reset_consec_frames = 30
@@ -338,7 +338,7 @@ class G1MimicPrivCfg(HumanoidMimicCfg):
         
 
 
-class G1MimicStuCfg(G1MimicPrivCfg):
+class G1MimicStuCfg(G1MimicPrivCfg): #只给学生未来一个参考帧
     class env(G1MimicPrivCfg.env):
         obs_type = 'student'
         tar_motion_steps = [1]
@@ -349,7 +349,7 @@ class G1MimicStuCfg(G1MimicPrivCfg):
         num_observations = n_obs_single * (G1MimicPrivCfg.env.history_len + 1)
 
 
-class G1MimicStuRLCfg(G1MimicPrivCfg):
+class G1MimicStuRLCfg(G1MimicPrivCfg): #同上
     class env(G1MimicPrivCfg.env):
         obs_type = 'student'
         tar_motion_steps = [1]
@@ -361,7 +361,7 @@ class G1MimicStuRLCfg(G1MimicPrivCfg):
 
 
 
-class G1MimicPrivCfgPPO(HumanoidMimicCfgPPO):
+class G1MimicPrivCfgPPO(HumanoidMimicCfgPPO): # teacher 的 PPO 配置
     seed = 1
     class runner(HumanoidMimicCfgPPO.runner):
         policy_class_name = 'ActorCriticMimic'

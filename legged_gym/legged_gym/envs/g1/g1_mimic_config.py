@@ -10,13 +10,14 @@ class G1MimicCfg(HumanoidMimicCfg):
         num_actions = 29
         n_priv = 0
         n_mimic_obs = 3*4 + 29 # 29 for dof pos
+        n_priv_mimic_obs = len(tar_motion_steps_priv) * n_mimic_obs
         n_proprio = len(tar_motion_steps_priv) * n_mimic_obs + 3 + 2 + 3*num_actions
         n_priv_latent = 4 + 1 + 2*num_actions
         extra_critic_obs = 3
         history_len = 10
         
         num_observations = n_proprio + n_priv_latent + history_len*n_proprio + n_priv + extra_critic_obs 
-        num_privileged_obs = None
+        num_privileged_obs = num_observations
 
         env_spacing = 3.  # not used with heightfields/trimeshes 
         send_timeouts = True # send time out information to the algorithm
@@ -308,7 +309,7 @@ class G1MimicCfgPPO(HumanoidMimicCfgPPO):
     class runner(HumanoidMimicCfgPPO.runner):
         policy_class_name = 'ActorCriticMimic'
         algorithm_class_name = 'PPO'
-        runner_class_name = 'OnPolicyRunner'
+        runner_class_name = 'OnPolicyRunnerMimic'
         max_iterations = 30002 # number of policy updates
 
         # logging

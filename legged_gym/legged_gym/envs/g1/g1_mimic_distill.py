@@ -25,7 +25,7 @@ class G1MimicDistill(HumanoidMimic):
             self.total_env_steps_counter = 24 * 100000
             self.global_counter = 24 * 100000
 
-    def _reset_ref_motion(self, env_ids, motion_ids=None):
+    def _reset_ref_motion(self, env_ids, motion_ids=None): #重置机器人训练环境
         n = len(env_ids)
         if motion_ids is None:
             motion_ids = self._motion_lib.sample_motions(n, motion_difficulty=self.motion_difficulty)
@@ -51,7 +51,7 @@ class G1MimicDistill(HumanoidMimic):
         self._ref_body_pos[env_ids] = convert_to_global_root_body_pos(root_pos=root_pos, root_rot=root_rot, body_pos=body_pos)
     
     
-    def _update_ref_motion(self):
+    def _update_ref_motion(self): #推进每个环境的motion往前走
         motion_ids = self._motion_ids
         motion_times = self._get_motion_times()
         root_pos, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, body_pos, root_pos_delta_local, root_rot_delta_local = self._motion_lib.calc_motion_frame(motion_ids, motion_times)
@@ -68,7 +68,7 @@ class G1MimicDistill(HumanoidMimic):
         self._ref_root_rot_delta_local[:] = root_rot_delta_local
         self._ref_body_pos[:] = convert_to_global_root_body_pos(root_pos=root_pos, root_rot=root_rot, body_pos=body_pos)
         
-    def _update_motion_difficulty(self, env_ids):
+    def _update_motion_difficulty(self, env_ids): #动作难度调整
         if self.obs_type == 'priv':
             super()._update_motion_difficulty(env_ids)
         elif self.obs_type == 'student':
@@ -76,7 +76,7 @@ class G1MimicDistill(HumanoidMimic):
         else:
             super()._update_motion_difficulty(env_ids)
 
-    def _get_body_indices(self):
+    def _get_body_indices(self): #获得body索引
         upper_arm_names = [s for s in self.body_names if self.cfg.asset.upper_arm_name in s]
         lower_arm_names = [s for s in self.body_names if self.cfg.asset.lower_arm_name in s]
         torso_name = [s for s in self.body_names if self.cfg.asset.torso_name in s]
@@ -100,12 +100,12 @@ class G1MimicDistill(HumanoidMimic):
         for i in range(len(knee_names)):
             self.knee_indices[i] = self.gym.find_actor_rigid_body_handle(self.envs[0], self.actor_handles[0], knee_names[i])
     
-    def _init_buffers(self):
+    def _init_buffers(self): #每个环境保留一个长度为 history_len 的时间窗口
         super()._init_buffers()
         self.obs_history_buf = torch.zeros((self.num_envs, self.cfg.env.history_len, self.cfg.env.n_obs_single), device=self.device)
         self.privileged_obs_history_buf = torch.zeros((self.num_envs, self.cfg.env.history_len, self.cfg.env.n_priv_obs_single), device=self.device)
     
-    def _get_noise_scale_vec(self, cfg):
+    def _get_noise_scale_vec(self, cfg): #增加噪声
         noise_scale_vec = torch.zeros(1, self.cfg.env.n_proprio, device=self.device)
         if not self.cfg.noise.add_noise:
             return noise_scale_vec
@@ -119,7 +119,7 @@ class G1MimicDistill(HumanoidMimic):
         
         return noise_scale_vec
             
-    def _get_mimic_obs(self):
+    def _get_mimic_obs(self): #构造 teacher 和 student 的 mimic 观测
         num_steps = self._tar_motion_steps_priv.shape[0]
         assert num_steps > 0, "Invalid number of target observation steps"
         motion_times = self._get_motion_times().unsqueeze(-1)
@@ -184,7 +184,7 @@ class G1MimicDistill(HumanoidMimic):
             
         return priv_mimic_obs_buf.reshape(self.num_envs, -1), mimic_obs_buf.reshape(self.num_envs, -1)
 
-    def compute_observations(self):
+    def compute_observations(self): #构造给模型的最终观测
         # imu_obs = torch.stack((self.roll, self.pitch, self.yaw), dim=1) # @YanjieZe: adding yaw would lead to global rotation tracking.
         imu_obs = torch.stack((self.roll, self.pitch), dim=1)
         self.base_yaw_quat = quat_from_euler_xyz(0*self.yaw, 0*self.yaw, self.yaw)

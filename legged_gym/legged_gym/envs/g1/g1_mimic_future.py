@@ -86,7 +86,7 @@ class G1MimicFuture(G1MimicDistill):
             force_links = getattr(cfg.env.force_curriculum, 'force_apply_links', ['left_rubber_hand', 'right_rubber_hand'])
             print(f"Force curriculum enabled with force application to {len(force_links)} links: {force_links}")
     
-    def _get_unified_motion_data(self):
+    def _get_unified_motion_data(self): #统一采样 teacher 的特权信息和 student 的未来信息
         """Get unified motion data for both privileged and future frames in a single sampling call.
         Returns processed motion data that can be used by both _get_mimic_obs and _get_future_motion_obs.
         """
@@ -168,7 +168,7 @@ class G1MimicFuture(G1MimicDistill):
             'total_steps': total_steps
         }
 
-    def _build_future_obs_from_data(self, motion_data):
+    def _build_future_obs_from_data(self, motion_data): #切割出 student 的未来信息
         """Build future motion observations from unified motion data."""
         if self.obs_type != 'student_future':
             return torch.zeros(self.num_envs, 0, device=self.device)
@@ -202,7 +202,7 @@ class G1MimicFuture(G1MimicDistill):
 
 
 
-    def _get_mimic_obs(self):
+    def _get_mimic_obs(self): #比 distill 版本多返回 student 的 future 信息
         """Override to use unified motion sampling for both privileged and future observations."""
         # Get unified motion data (SINGLE sampling call for all frames)
         motion_data = self._get_unified_motion_data()
@@ -265,7 +265,7 @@ class G1MimicFuture(G1MimicDistill):
             # Return original format for compatibility
             return priv_mimic_obs, mimic_obs
 
-    def compute_observations(self):
+    def compute_observations(self): #给 student 额外喂了 future 信息
         """Override to include future motion observations while maintaining compatibility."""
         # Get IMU observations (same as parent)
         imu_obs = torch.stack((self.roll, self.pitch), dim=1)
@@ -394,7 +394,7 @@ class G1MimicFuture(G1MimicDistill):
 
 
 
-    def _get_force_curriculum_info(self):
+    def _get_force_curriculum_info(self): #日志打印外力信息
         """Get force curriculum information for logging."""
         if not self.enable_force_curriculum:
             return {}
@@ -458,7 +458,7 @@ class G1MimicFuture(G1MimicDistill):
         super().post_physics_step()
 
 
-    def _log_error_aware_sampling_progress(self):
+    def _log_error_aware_sampling_progress(self): #用关键 body 跟踪误差做统计
         """Log error aware sampling progress including body error statistics and max key body errors per motion."""
         import os
         
@@ -519,7 +519,7 @@ class G1MimicFuture(G1MimicDistill):
                 print(f"Error logging body error stats to wandb: {e}")
 
 
-    def _log_max_key_body_error_per_motion(self):
+    def _log_max_key_body_error_per_motion(self): #超过阈值的动作有哪些
         """Log max key body error for each motion (similar to logs_motion_difficulty)."""
         import os
         
@@ -579,7 +579,7 @@ class G1MimicFuture(G1MimicDistill):
                 except Exception as e:
                     print(f"Error logging max key body error stats to wandb: {e}")
     
-    def _post_physics_step_callback(self):
+    def _post_physics_step_callback(self): #挂载日志回调函数
         """Override to add error aware sampling logging."""
         # Call parent callback first
         super()._post_physics_step_callback()
@@ -591,7 +591,7 @@ class G1MimicFuture(G1MimicDistill):
 
     # ============================= FALCON Force Curriculum Methods =============================
     
-    def _init_force_curriculum_components(self, cfg):
+    def _init_force_curriculum_components(self, cfg):  #初始化外力信息
         """Initialize FALCON-style curriculum force application components."""
         # Force curriculum parameters from config
         force_cfg = cfg.env.force_curriculum
@@ -662,7 +662,7 @@ class G1MimicFuture(G1MimicDistill):
         print(f"Force ranges: X={self.apply_force_x_range}, Y={self.apply_force_y_range}, Z={self.apply_force_z_range}")
         print(f"Initial force scale: {self.force_scale_initial_scale}")
     
-    def _update_force_curriculum(self, env_ids):
+    def _update_force_curriculum(self, env_ids): #用 episode 长度来更新外力大小
         """Update force scale based on episode performance (curriculum learning)."""
         if not self.force_scale_curriculum:
             return
@@ -699,7 +699,7 @@ class G1MimicFuture(G1MimicDistill):
             (len(env_ids),), device=self.device
         )
     
-    def _calculate_ee_forces(self):
+    def _calculate_ee_forces(self): #计算并施加外力
         """Calculate end-effector forces based on FALCON's curriculum force approach."""
         # Increment episode length counter
         self.episode_length_counter += 1

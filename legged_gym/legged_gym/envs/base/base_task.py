@@ -28,6 +28,7 @@
 #
 # Copyright (c) 2021 ETH Zurich, Nikita Rudin
 
+import os
 import sys
 from isaacgym import gymapi
 from isaacgym import gymutil, gymtorch
@@ -92,9 +93,17 @@ class BaseTask():
 
         # if running with a viewer, set up keyboard shortcuts and camera
         if self.headless == False:
+            print(
+                "[viewer debug] "
+                f"DISPLAY={os.environ.get('DISPLAY', '')} "
+                f"WAYLAND_DISPLAY={os.environ.get('WAYLAND_DISPLAY', '')} "
+                f"headless={self.headless} "
+                f"graphics_device_id={self.graphics_device_id}"
+            )
             # subscribe to keyboard shortcuts
             self.viewer = self.gym.create_viewer(
                 self.sim, gymapi.CameraProperties())
+            print(f"[viewer debug] create_viewer returned None={self.viewer is None}")
             self.gym.subscribe_viewer_keyboard_event(
                 self.viewer, gymapi.KEY_ESCAPE, "QUIT")
             self.gym.subscribe_viewer_keyboard_event(
